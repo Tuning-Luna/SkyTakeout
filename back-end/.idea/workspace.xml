@@ -27,6 +27,7 @@
     "ModuleVcsDetector.initialDetectionPerformed": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHELLCHECK.PATH": "我会在意",
+    "Spring Boot.SkyServerApplication.executor": "Run",
     "git-widget-placeholder": "main",
     "ignore.virus.scanning.warn.message": "true",
     "node.js.detected.package.eslint": "true",
@@ -40,6 +41,11 @@
     "project.structure.side.proportion": "0.0",
     "settings.editor.selected.configurable": "project.propVCSSupport.DirectoryMappings",
     "vue.rearranger.settings.migration": "true"
+  },
+  "keyToStringList": {
+    "DatabaseDriversLRU": [
+      "mysql"
+    ]
   }
 }]]></component>
   <component name="RunManager">
@@ -73,6 +79,7 @@
       <workItem from="1757666717813" duration="435000" />
       <workItem from="1757667375646" duration="86000" />
       <workItem from="1757667469449" duration="304000" />
+      <workItem from="1757725772976" duration="2228000" />
     </task>
     <servers />
   </component>
