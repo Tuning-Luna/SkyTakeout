@@ -25,6 +25,10 @@
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "RequestMappingsPanelOrder0": "0",
+    "RequestMappingsPanelOrder1": "1",
+    "RequestMappingsPanelWidth0": "75",
+    "RequestMappingsPanelWidth1": "75",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHELLCHECK.PATH": "我会在意",
     "Spring Boot.SkyServerApplication.executor": "Run",
@@ -79,7 +83,7 @@
       <workItem from="1757666717813" duration="435000" />
       <workItem from="1757667375646" duration="86000" />
       <workItem from="1757667469449" duration="304000" />
-      <workItem from="1757725772976" duration="3695000" />
+      <workItem from="1757725772976" duration="4631000" />
     </task>
     <servers />
   </component>

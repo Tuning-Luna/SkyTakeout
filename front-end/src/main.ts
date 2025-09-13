@@ -4,6 +4,9 @@ import App from './App.vue'
 import router from './router'
 // Pinia配置
 import { createPinia } from 'pinia'
+// 清空样式CSS
+import '@/styles/normalize.css'
+
 const app = createApp(App)
 const pinia = createPinia()
 
