@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- namespace 必须和接口全限定类名一致 -->
+<mapper namespace="com.tuning.mapper.EmployeeMapper">
+    <select id="selectByUsername" resultType="com.Tuning.entity.Employee">
+        SELECT id, name, username, password
+        FROM employee
+        WHERE username = #{username}
+    </select>
+</mapper>

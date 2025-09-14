@@ -1,4 +1,9 @@
 spring:
+  datasource:
+    url: jdbc:mysql://localhost:3306/sky_take_out
+    username: root
+    password: admin123
+    driver-class-name: com.mysql.cj.jdbc.Driver
   application:
     name: sky-server
   main:
@@ -6,3 +11,9 @@ spring:
 server:
   servlet:
     context-path: /api/v1
+
+
+mybatis:
+  type-aliases-package: com.tuning.pojo.entity
+  configuration:
+    map-underscore-to-camel-case: true     # 数据库下划线字段自动映射到驼峰字段

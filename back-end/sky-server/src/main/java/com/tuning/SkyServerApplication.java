@@ -1,16 +1,18 @@
-package com.tuning.skyserver;
+package com.tuning;
 
 import lombok.extern.slf4j.Slf4j;
+import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
 @Slf4j
+@MapperScan("com.tuning.mapper")
 public class SkyServerApplication {
 
   public static void main(String[] args) {
     SpringApplication.run(SkyServerApplication.class, args);
-    log.info("Server start,request base url : http://localhost:8080/api/v1");
+    log.info("Server Begin,Base url: http://localhost:8080/api/v1");
   }
 
 }
