@@ -14,15 +14,31 @@ request.interceptors.request.use(function (config) {
   return Promise.reject(error);
 });
 
-// 添加响应拦截器
-request.interceptors.response.use(function (response) {
-  // 2xx 范围内的状态码都会触发该函数。
-  // 对响应数据做点什么
-  return response;
-}, function (error) {
-  // 超出 2xx 范围的状态码都会触发该函数。
-  // 对响应错误做点什么
-  return Promise.reject(error);
-});
+// 响应拦截器
+request.interceptors.response.use(
+  function (response) {
+    // 网络层面：只要是 2xx，这里就会进来
+    const res = response.data
+
+    // 业务层面：判断 code
+    if (res.code === 0) {
+      return res // 成功
+    } else {
+      return Promise.reject(new Error(res.message || '业务错误'))
+    }
+  },
+  function (error) {
+    // 网络层面：非 2xx 会到这里
+    if (error.response) {
+      // 后端返回了非 2xx
+      console.error('网络错误:', error.response.status, error.response.data)
+    } else {
+      // 请求本身失败（断网、超时）
+      console.error('请求失败:', error.message)
+    }
+    return Promise.reject(error)
+  }
+)
+
 
 export { request }

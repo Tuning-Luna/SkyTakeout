@@ -18,7 +18,7 @@ const formValue = ref({
 
 onMounted(async () => {
   const res = await request.post('login')
-  console.log(res.data)
+  console.log(res)
 })
 
 // 表单规则
