@@ -1,0 +1,8 @@
+spring:
+  application:
+    name: sky-server
+  main:
+    banner-mode: off
+server:
+  servlet:
+    context-path: /api/v1

@@ -1,8 +1,9 @@
 <script lang="ts" setup>
-import { ref } from 'vue'
+import { onMounted, ref } from 'vue'
 import { NForm, NFormItem, NInput, NButton, FormInst, useMessage } from 'naive-ui'
 import type { FormRules } from 'naive-ui'
 import { useRouter } from 'vue-router'
+import { request } from '@/utils/request'
 
 const router = useRouter()
 
@@ -13,6 +14,11 @@ const message = useMessage()
 const formValue = ref({
   username: '',
   password: ''
+})
+
+onMounted(async () => {
+  const res = await request.post('login')
+  console.log(res.data)
 })
 
 // 表单规则
