@@ -20,4 +20,6 @@ public interface EmployeeMapper {
   Integer insertEmployee(Employee employee);
 
   Page<EmployeePageQueryVO> pageQuery(EmployeePageQueryDTO queryDTO);
+
+  Integer updateEmployeeById(Employee employee);
 }

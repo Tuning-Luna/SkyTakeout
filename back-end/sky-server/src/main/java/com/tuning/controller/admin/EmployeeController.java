@@ -53,4 +53,15 @@ public class EmployeeController {
     return ApiResult.ok(result, "查询成功");
   }
 
+  // 改变状态（禁用 / 启用）
+  @PostMapping("/status/{status}")
+  public ApiResult<String> updateStatus(
+          @PathVariable Integer status,   // 路径参数
+          @RequestParam String id) {      // 查询参数
+
+    // 调用 Service 层处理逻辑
+    employeeService.updateStatusById(id, status);
+
+    return ApiResult.ok("状态更新成功");
+  }
 }

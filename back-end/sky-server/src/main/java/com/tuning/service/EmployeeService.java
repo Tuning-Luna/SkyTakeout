@@ -13,4 +13,6 @@ public interface EmployeeService {
   void insert(EmployeeCreateDTO employeeCreateDTO);
 
   PageResult<EmployeePageQueryVO> page(EmployeePageQueryDTO queryDTO);
+
+  void updateStatusById(String id, Integer status);
 }

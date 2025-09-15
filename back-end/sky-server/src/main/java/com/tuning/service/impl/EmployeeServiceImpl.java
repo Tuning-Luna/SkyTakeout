@@ -46,7 +46,7 @@ public class EmployeeServiceImpl implements EmployeeService {
       throw new BizException(HttpStatus.NOT_ACCEPTABLE, "密码错误");
     }
     if (employee.getStatus() == 0) {
-      throw new BizException(HttpStatus.NOT_ACCEPTABLE, "此员工已被禁用");
+      throw new BizException(HttpStatus.NOT_ACCEPTABLE, "您无权登录");
     }
 
     // 组装VO对象返回给前端
@@ -66,8 +66,6 @@ public class EmployeeServiceImpl implements EmployeeService {
 
   @Override
   public void insert(EmployeeCreateDTO employeeCreateDTO) {
-    //   TODO:此处应有表单校验
-
     boolean exists = employeeMapper.existsByUsername(employeeCreateDTO.getUsername());
 
     if (exists) {
@@ -102,5 +100,16 @@ public class EmployeeServiceImpl implements EmployeeService {
     long total = page.getTotal();
     List<EmployeePageQueryVO> records = page.getResult();
     return new PageResult<>(total, records);
+  }
+
+  @Override
+  public void updateStatusById(String id, Integer status) {
+    Employee employee = Employee.builder()
+            .id(Long.valueOf(id))
+            .status(status)
+            .updateUser(BaseContext.getCurrentId())
+            .build();
+
+    employeeMapper.updateEmployeeById(employee);
   }
 }
