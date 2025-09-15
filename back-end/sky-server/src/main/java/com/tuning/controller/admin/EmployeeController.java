@@ -4,10 +4,11 @@ import com.Tuning.context.BaseContext;
 import com.Tuning.dto.EmployeeCreateDTO;
 import com.Tuning.dto.EmployeeLoginDTO;
 import com.Tuning.dto.EmployeePageQueryDTO;
+import com.Tuning.dto.EmployeeUpdateDTO;
 import com.Tuning.result.ApiResult;
 import com.Tuning.result.PageResult;
 import com.Tuning.vo.EmployeeLoginVO;
-import com.Tuning.vo.EmployeePageQueryVO;
+import com.Tuning.vo.EmployeeQueryVO;
 import com.tuning.service.EmployeeService;
 import jakarta.validation.Valid;
 import org.apache.ibatis.jdbc.Null;
@@ -47,9 +48,9 @@ public class EmployeeController {
 
   // 分页查询+name筛选
   @GetMapping("/page")
-  public ApiResult<PageResult<EmployeePageQueryVO>>
+  public ApiResult<PageResult<EmployeeQueryVO>>
   page(@Valid EmployeePageQueryDTO queryDTO) {
-    PageResult<EmployeePageQueryVO> result = employeeService.page(queryDTO);
+    PageResult<EmployeeQueryVO> result = employeeService.page(queryDTO);
     return ApiResult.ok(result, "查询成功");
   }
 
@@ -64,4 +65,18 @@ public class EmployeeController {
 
     return ApiResult.ok("状态更新成功");
   }
+
+  // 根据id查询员工
+  @GetMapping("/{id}")
+  public ApiResult<EmployeeQueryVO> get(@PathVariable Long id) {
+    return ApiResult.ok(employeeService.getById(id));
+  }
+
+  // 更新用户信息
+  @PutMapping
+  public ApiResult<String> update(@RequestBody @Valid EmployeeUpdateDTO employeeDTO) {
+    employeeService.updateById(employeeDTO);
+    return ApiResult.ok("编辑成功");
+  }
+
 }

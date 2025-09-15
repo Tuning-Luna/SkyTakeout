@@ -4,13 +4,14 @@ import com.Tuning.context.BaseContext;
 import com.Tuning.dto.EmployeeCreateDTO;
 import com.Tuning.dto.EmployeeLoginDTO;
 import com.Tuning.dto.EmployeePageQueryDTO;
+import com.Tuning.dto.EmployeeUpdateDTO;
 import com.Tuning.entity.Employee;
 import com.Tuning.exception.BizException;
 import com.Tuning.result.PageResult;
 import com.Tuning.utils.JWTUtil;
 import com.Tuning.utils.PasswordUtil;
 import com.Tuning.vo.EmployeeLoginVO;
-import com.Tuning.vo.EmployeePageQueryVO;
+import com.Tuning.vo.EmployeeQueryVO;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.tuning.mapper.EmployeeMapper;
@@ -93,12 +94,12 @@ public class EmployeeServiceImpl implements EmployeeService {
   }
 
   @Override
-  public PageResult<EmployeePageQueryVO> page(EmployeePageQueryDTO queryDTO) {
+  public PageResult<EmployeeQueryVO> page(EmployeePageQueryDTO queryDTO) {
     PageHelper.startPage(queryDTO.getPage(), queryDTO.getPageSize());
 
-    Page<EmployeePageQueryVO> page = employeeMapper.pageQuery(queryDTO);
+    Page<EmployeeQueryVO> page = employeeMapper.pageQuery(queryDTO);
     long total = page.getTotal();
-    List<EmployeePageQueryVO> records = page.getResult();
+    List<EmployeeQueryVO> records = page.getResult();
     return new PageResult<>(total, records);
   }
 
@@ -111,5 +112,42 @@ public class EmployeeServiceImpl implements EmployeeService {
             .build();
 
     employeeMapper.updateEmployeeById(employee);
+  }
+
+  @Override
+  public void updateById(EmployeeUpdateDTO employeeDTO) {
+    // 1. 检查要更新的数据是否存在
+    Employee e = employeeMapper.selectById(employeeDTO.getId());
+    if (e == null) {
+      throw new BizException(HttpStatus.BAD_REQUEST, "要修改的数据不存在");
+    }
+
+    // 2. 检查用户名是否重复（排除自己）
+    Employee exist = employeeMapper.selectByUsername(employeeDTO.getUsername());
+    if (exist != null && ! exist.getId().equals(employeeDTO.getId())) {
+      throw new BizException(HttpStatus.CONFLICT, "用户名已存在");
+    }
+
+    // 3. 执行更新
+    Employee newEmp = new Employee();
+    BeanUtils.copyProperties(employeeDTO, newEmp);
+    newEmp.setUpdateUser(BaseContext.getCurrentId());
+    newEmp.setUpdateTime(LocalDateTime.now());
+
+    int rows = employeeMapper.updateEmployeeById(newEmp);
+    if (rows != 1) {
+      throw new BizException(HttpStatus.NOT_ACCEPTABLE, "更新失败");
+    }
+  }
+
+
+  @Override
+  public EmployeeQueryVO getById(Long id) {
+    Employee employee = employeeMapper.selectById(id);
+    EmployeeQueryVO employeeQueryVO = new EmployeeQueryVO();
+    BeanUtils.copyProperties(employee, employeeQueryVO);
+    // 查到的Entity数据直接赋值给VO，因为字段都一样
+    employeeQueryVO.setPassword("*******"); // 密码设为空
+    return employeeQueryVO;
   }
 }

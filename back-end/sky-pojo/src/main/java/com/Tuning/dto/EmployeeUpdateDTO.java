@@ -1,25 +1,24 @@
 package com.Tuning.dto;
 
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Builder
-public class EmployeeCreateDTO {
-  // id前端不应该传递，传递了也会重置为null，由数据库自动递增，为了保证接口文档一致加上此字段
+public class EmployeeUpdateDTO {
+  @NotNull(message = "id不能为空")
   private Long id;
 
   @NotBlank(message = "用户名不能为空")
   private String username;
 
-  @NotBlank(message = "姓名不能为空")
+  @NotBlank(message = "名字不能为空")
   private String name;
 
   @Pattern(regexp = "^\\d{11}$", message = "手机号格式不正确")
@@ -30,5 +29,4 @@ public class EmployeeCreateDTO {
 
   @NotBlank(message = "身份证号不能为空")
   private String idNumber;
-
 }

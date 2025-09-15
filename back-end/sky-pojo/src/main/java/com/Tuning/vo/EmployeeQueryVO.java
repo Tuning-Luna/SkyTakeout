@@ -13,7 +13,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @Builder
 // 使用分页查询返回的VO（和entity/Employee的数据一样）
-public class EmployeePageQueryVO {
+public class EmployeeQueryVO {
 
   private Long id;
 
