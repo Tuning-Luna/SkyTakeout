@@ -1,5 +1,6 @@
 package com.tuning.controller.admin;
 
+import com.Tuning.context.BaseContext;
 import com.Tuning.dto.EmployeeCreateDTO;
 import com.Tuning.dto.EmployeeLoginDTO;
 import com.Tuning.result.ApiResult;
@@ -36,6 +37,12 @@ public class EmployeeController {
   public ApiResult<Null> insert(@RequestBody @Valid EmployeeCreateDTO employeeCreateDTO) {
     employeeService.insert(employeeCreateDTO);
     return ApiResult.ok(null, "添加员工成功");
+  }
+
+  // 登出
+  @PostMapping("/logout")
+  public ApiResult<String> logout() {
+    return ApiResult.ok("id为" + BaseContext.getCurrentId() + "的职工成功退出登录");
   }
 
 }
