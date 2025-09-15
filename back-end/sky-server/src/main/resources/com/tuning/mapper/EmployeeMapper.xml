@@ -7,7 +7,7 @@
 <mapper namespace="com.tuning.mapper.EmployeeMapper">
 
     <select id="selectByUsername" resultType="com.Tuning.entity.Employee">
-        SELECT id, name, username, password
+        SELECT id, name, username, password, status
         FROM employee
         WHERE username = #{username}
     </select>

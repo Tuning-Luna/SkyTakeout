@@ -30,6 +30,7 @@ public class EmployeeController {
     return ApiResult.ok(vo);
   }
 
+  // 新增
   @PostMapping
   public ApiResult<Null> insert(@RequestBody EmployeeCreateDTO employeeCreateDTO) {
     employeeService.insert(employeeCreateDTO);
