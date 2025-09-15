@@ -5,9 +5,42 @@
 
 <!-- namespace 必须和接口全限定类名一致 -->
 <mapper namespace="com.tuning.mapper.EmployeeMapper">
+
     <select id="selectByUsername" resultType="com.Tuning.entity.Employee">
         SELECT id, name, username, password
         FROM employee
         WHERE username = #{username}
     </select>
+
+    <select id="existsByUsername" resultType="boolean">
+        SELECT COUNT(1) > 0
+        FROM employee
+        WHERE username = #{username}
+    </select>
+
+    <insert id="insertEmployee" parameterType="com.Tuning.entity.Employee" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO employee
+        (username,
+         name,
+         password,
+         phone,
+         sex,
+         id_number,
+         status,
+         create_time,
+         update_time,
+         create_user,
+         update_user)
+        VALUES (#{username},
+                #{name},
+                #{password},
+                #{phone},
+                #{sex},
+                #{idNumber},
+                #{status},
+                #{createTime},
+                #{updateTime},
+                #{createUser},
+                #{updateUser})
+    </insert>
 </mapper>
