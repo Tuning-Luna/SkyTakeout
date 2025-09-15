@@ -57,7 +57,7 @@
     "project.structure.last.edited": "模块",
     "project.structure.proportion": "0.0",
     "project.structure.side.proportion": "0.0",
-    "settings.editor.selected.configurable": "actions.on.save",
+    "settings.editor.selected.configurable": "terminal",
     "vue.rearranger.settings.migration": "true"
   },
   "keyToStringList": {
@@ -113,7 +113,7 @@
       <workItem from="1757853814758" duration="1339000" />
       <workItem from="1757855175288" duration="988000" />
       <workItem from="1757896969063" duration="773000" />
-      <workItem from="1757917996454" duration="4660000" />
+      <workItem from="1757917996454" duration="6849000" />
     </task>
     <servers />
   </component>

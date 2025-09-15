@@ -1,5 +1,6 @@
 package com.tuning.interceptor;
 
+import com.Tuning.context.BaseContext;
 import com.Tuning.exception.BizException;
 import com.Tuning.utils.JWTUtil;
 import jakarta.servlet.http.HttpServletRequest;
@@ -31,7 +32,8 @@ public class JwtTokenAdminInterceptor implements HandlerInterceptor {
     }
 
     Map<String, Object> emp = JWTUtil.parseToken(token);
-    System.out.println("验证成功，当前登录用户的id是：" + emp.get("id"));
+    Long empId = Long.valueOf(emp.get("id").toString());
+    BaseContext.setCurrentId(empId);
     return true;
   }
 }

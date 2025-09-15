@@ -1,5 +1,6 @@
 package com.tuning.service.impl;
 
+import com.Tuning.context.BaseContext;
 import com.Tuning.dto.EmployeeCreateDTO;
 import com.Tuning.dto.EmployeeLoginDTO;
 import com.Tuning.entity.Employee;
@@ -77,8 +78,8 @@ public class EmployeeServiceImpl implements EmployeeService {
     employee.setUpdateTime(LocalDateTime.now());
     employee.setPassword(PasswordUtil.encrypt("123456")); // 密码默认123456
     employee.setStatus(1); // 默认是1，启用权限
-
-    //   TODO:还有create_user和update_user需要填写
+    employee.setCreateUser(BaseContext.getCurrentId());
+    employee.setUpdateUser(BaseContext.getCurrentId());
 
     Integer rows = employeeMapper.insertEmployee(employee);
     if (rows != 1) {

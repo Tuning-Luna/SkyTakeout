@@ -5,6 +5,7 @@ import com.Tuning.dto.EmployeeLoginDTO;
 import com.Tuning.result.ApiResult;
 import com.Tuning.vo.EmployeeLoginVO;
 import com.tuning.service.EmployeeService;
+import jakarta.validation.Valid;
 import org.apache.ibatis.jdbc.Null;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -32,7 +33,7 @@ public class EmployeeController {
 
   // 新增
   @PostMapping
-  public ApiResult<Null> insert(@RequestBody EmployeeCreateDTO employeeCreateDTO) {
+  public ApiResult<Null> insert(@RequestBody @Valid EmployeeCreateDTO employeeCreateDTO) {
     employeeService.insert(employeeCreateDTO);
     return ApiResult.ok(null, "添加员工成功");
   }
