@@ -43,4 +43,16 @@
                 #{createUser},
                 #{updateUser})
     </insert>
+
+    <select id="pageQuery" resultType="com.Tuning.vo.EmployeePageQueryVO">
+        SELECT *
+        FROM employee
+        <where>
+            <if test="name != null and name != ''">
+                name LIKE CONCAT('%', #{name}, '%')
+            </if>
+        </where>
+        ORDER BY update_time DESC
+    </select>
+
 </mapper>

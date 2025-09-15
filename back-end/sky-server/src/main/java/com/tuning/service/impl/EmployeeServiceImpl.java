@@ -3,11 +3,16 @@ package com.tuning.service.impl;
 import com.Tuning.context.BaseContext;
 import com.Tuning.dto.EmployeeCreateDTO;
 import com.Tuning.dto.EmployeeLoginDTO;
+import com.Tuning.dto.EmployeePageQueryDTO;
 import com.Tuning.entity.Employee;
 import com.Tuning.exception.BizException;
+import com.Tuning.result.PageResult;
 import com.Tuning.utils.JWTUtil;
 import com.Tuning.utils.PasswordUtil;
 import com.Tuning.vo.EmployeeLoginVO;
+import com.Tuning.vo.EmployeePageQueryVO;
+import com.github.pagehelper.Page;
+import com.github.pagehelper.PageHelper;
 import com.tuning.mapper.EmployeeMapper;
 import com.tuning.service.EmployeeService;
 import org.springframework.beans.BeanUtils;
@@ -17,6 +22,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @Service
@@ -86,5 +92,15 @@ public class EmployeeServiceImpl implements EmployeeService {
       throw new BizException(HttpStatus.NOT_ACCEPTABLE, "插入失败");
     }
     System.out.println("插入成功，新的id：" + employee.getId());
+  }
+
+  @Override
+  public PageResult<EmployeePageQueryVO> page(EmployeePageQueryDTO queryDTO) {
+    PageHelper.startPage(queryDTO.getPage(), queryDTO.getPageSize());
+
+    Page<EmployeePageQueryVO> page = employeeMapper.pageQuery(queryDTO);
+    long total = page.getTotal();
+    List<EmployeePageQueryVO> records = page.getResult();
+    return new PageResult<>(total, records);
   }
 }

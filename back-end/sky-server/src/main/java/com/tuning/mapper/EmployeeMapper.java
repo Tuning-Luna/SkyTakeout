@@ -1,7 +1,10 @@
 package com.tuning.mapper;
 
 
+import com.Tuning.dto.EmployeePageQueryDTO;
 import com.Tuning.entity.Employee;
+import com.Tuning.vo.EmployeePageQueryVO;
+import com.github.pagehelper.Page;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
@@ -15,4 +18,6 @@ public interface EmployeeMapper {
 
   // 插入员工
   Integer insertEmployee(Employee employee);
+
+  Page<EmployeePageQueryVO> pageQuery(EmployeePageQueryDTO queryDTO);
 }

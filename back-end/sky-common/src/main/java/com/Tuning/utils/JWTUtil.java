@@ -21,8 +21,8 @@ public class JWTUtil {
 
   private static final SecretKey SECRET_KEY = Keys.hmacShaKeyFor(SECRET_KEY_STR.getBytes(StandardCharsets.UTF_8));
 
-  // 默认过期时间：1小时（毫秒）
-  private static final long DEFAULT_EXPIRE_MILLIS = 60 * 60 * 1000;
+  // 默认过期时间：31day
+  private static final long DEFAULT_EXPIRE_MILLIS = 60L * 60 * 1000 * 744;
 
   /**
    * 生成 token（默认过期时间）
