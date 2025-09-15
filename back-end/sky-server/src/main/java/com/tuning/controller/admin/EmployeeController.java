@@ -1,10 +1,7 @@
 package com.tuning.controller.admin;
 
 import com.Tuning.context.BaseContext;
-import com.Tuning.dto.EmployeeCreateDTO;
-import com.Tuning.dto.EmployeeLoginDTO;
-import com.Tuning.dto.EmployeePageQueryDTO;
-import com.Tuning.dto.EmployeeUpdateDTO;
+import com.Tuning.dto.*;
 import com.Tuning.result.ApiResult;
 import com.Tuning.result.PageResult;
 import com.Tuning.vo.EmployeeLoginVO;
@@ -79,4 +76,10 @@ public class EmployeeController {
     return ApiResult.ok("编辑成功");
   }
 
+  // 修改密码
+  @PutMapping("/editPassword")
+  public ApiResult<String> updatePassword(@RequestBody @Valid EmployeePasswordUpdateDTO dto) {
+    employeeService.upddatePassword(dto);
+    return ApiResult.ok("修改成功");
+  }
 }

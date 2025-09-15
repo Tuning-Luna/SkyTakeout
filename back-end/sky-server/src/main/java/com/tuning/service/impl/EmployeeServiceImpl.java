@@ -1,10 +1,7 @@
 package com.tuning.service.impl;
 
 import com.Tuning.context.BaseContext;
-import com.Tuning.dto.EmployeeCreateDTO;
-import com.Tuning.dto.EmployeeLoginDTO;
-import com.Tuning.dto.EmployeePageQueryDTO;
-import com.Tuning.dto.EmployeeUpdateDTO;
+import com.Tuning.dto.*;
 import com.Tuning.entity.Employee;
 import com.Tuning.exception.BizException;
 import com.Tuning.result.PageResult;
@@ -149,5 +146,26 @@ public class EmployeeServiceImpl implements EmployeeService {
     // 查到的Entity数据直接赋值给VO，因为字段都一样
     employeeQueryVO.setPassword("*******"); // 密码设为空
     return employeeQueryVO;
+  }
+
+  @Override
+  public void upddatePassword(EmployeePasswordUpdateDTO dto) {
+    Employee employee = employeeMapper.selectById(dto.getEmpId());
+    if (employee == null) {
+      throw new BizException(HttpStatus.BAD_REQUEST, "用户不存在");
+    }
+
+    if (! PasswordUtil.matches(dto.getOldPassword(), employee.getPassword())) {
+      throw new BizException(HttpStatus.BAD_REQUEST, "旧密码不正确");
+    }
+
+    // 构建更新对象
+    Employee updateEmployee = new Employee();
+    updateEmployee.setId(dto.getEmpId());
+    updateEmployee.setPassword(PasswordUtil.encrypt(dto.getNewPassword()));
+    updateEmployee.setUpdateUser(BaseContext.getCurrentId());
+
+    // 调用万能更新方法
+    employeeMapper.updateEmployeeById(updateEmployee);
   }
 }
