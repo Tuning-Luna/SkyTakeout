@@ -16,10 +16,10 @@ const formValue = ref({
   password: ''
 })
 
-onMounted(async () => {
-  const res = await request.post('login')
-  console.log(res)
-})
+// onMounted(async () => {
+//   const res = await request.post('/login')
+//   console.log(res)
+// })
 
 // 表单规则
 const rules: FormRules = {
