@@ -5,10 +5,16 @@
 
 <!-- namespace 必须和接口全限定类名一致 -->
 <mapper namespace="com.tuning.mapper.DishMapper">
-
     <select id="countByCategoryId" resultType="java.lang.Integer">
         SELECT COUNT(id)
         FROM dish
         WHERE category_id = #{categoryId}
     </select>
+
+    <insert id="insert" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO dish (name, category_id, price, image, description, status, create_time, update_time, create_user,
+                          update_user)
+        VALUES (#{name}, #{categoryId}, #{price}, #{image}, #{description}, #{status}, #{createTime}, #{updateTime},
+                #{createUser}, #{updateUser})
+    </insert>
 </mapper>
