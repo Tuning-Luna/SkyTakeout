@@ -1,13 +1,13 @@
 package com.tuning.controller.admin;
 
 import com.Tuning.dto.DishCreateDTO;
+import com.Tuning.dto.DishPageQueryDTO;
 import com.Tuning.result.ApiResult;
+import com.Tuning.result.PageResult;
+import com.Tuning.vo.DishPageQueryVO;
 import com.tuning.service.DishService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/admin/dish")
@@ -24,4 +24,17 @@ public class DishController {
     dishService.insertWithFlavor(dto);
     return ApiResult.ok("新增菜品成功");
   }
+
+  @GetMapping("/page")
+  public ApiResult<PageResult<DishPageQueryVO>> pageQuery(DishPageQueryDTO dto) {
+    PageResult<DishPageQueryVO> pageQuery = dishService.pageQuery(dto);
+    return ApiResult.ok(pageQuery);
+  }
+
+  @DeleteMapping
+  public ApiResult<String> delete() {
+
+    return ApiResult.ok();
+  }
+
 }

@@ -28,8 +28,6 @@ public class AutoFillAspect {
   // 前置通知，为公共字段赋值
   @Before("autoFillPointCut()")
   public void autoFill(JoinPoint jp) {
-    System.out.println("开始进行插入");
-
     // 1. 获取方法签名
     MethodSignature signature = (MethodSignature) jp.getSignature();
     Method method = signature.getMethod();

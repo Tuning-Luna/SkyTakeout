@@ -1,9 +1,14 @@
 package com.tuning.service.impl;
 
 import com.Tuning.dto.DishCreateDTO;
+import com.Tuning.dto.DishPageQueryDTO;
 import com.Tuning.entity.Dish;
 import com.Tuning.entity.DishFlavor;
 import com.Tuning.exception.BizException;
+import com.Tuning.result.PageResult;
+import com.Tuning.vo.DishPageQueryVO;
+import com.github.pagehelper.Page;
+import com.github.pagehelper.PageHelper;
 import com.tuning.mapper.DishFlavorMapper;
 import com.tuning.mapper.DishMapper;
 import com.tuning.service.DishService;
@@ -32,7 +37,6 @@ public class DishServiceImpl implements DishService {
   @Override
   @Transactional
   public void insertWithFlavor(DishCreateDTO dto) {
-
     // 插入一个菜品
     Dish dish = new Dish();
 
@@ -55,6 +59,13 @@ public class DishServiceImpl implements DishService {
       flavors.forEach(f -> f.setDishId(dish.getId()));
       dishFlavorMapper.insertBatch(flavors); // 批量插入
     }
+  }
 
+  @Override
+  public PageResult<DishPageQueryVO> pageQuery(DishPageQueryDTO dto) {
+    PageHelper.startPage(dto.getPage(), dto.getPageSize());
+
+    Page<DishPageQueryVO> page = dishMapper.pageQuery(dto);
+    return new PageResult<>(page.getTotal(), page.getResult());
   }
 }
