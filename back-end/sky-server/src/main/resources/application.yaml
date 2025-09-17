@@ -6,14 +6,24 @@ spring:
     driver-class-name: com.mysql.cj.jdbc.Driver
   application:
     name: sky-server
+  servlet:
+    multipart:
+      max-file-size: 10MB
+      max-request-size: 50MB
   main:
     banner-mode: off
 server:
   servlet:
     context-path: /api/v1
 
-
 mybatis:
   type-aliases-package: com.tuning.pojo.entity
   configuration:
     map-underscore-to-camel-case: true     # 数据库下划线字段自动映射到驼峰字段
+
+# 阿里云数据库相关的配置
+aliyun:
+  oss:
+    endpoint: https://oss-cn-beijing.aliyuncs.com
+    bucketName: java-web-test-tuning
+    region: cn-beijing
