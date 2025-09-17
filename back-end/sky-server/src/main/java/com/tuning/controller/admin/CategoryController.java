@@ -34,4 +34,10 @@ public class CategoryController {
     PageResult<CategoryQueryVO> res = categoryService.page(dto);
     return ApiResult.ok(res);
   }
+
+  @DeleteMapping
+  public ApiResult<String> deleteById(Long id) {
+    categoryService.deleteById(id);
+    return ApiResult.ok("成功删除");
+  }
 }

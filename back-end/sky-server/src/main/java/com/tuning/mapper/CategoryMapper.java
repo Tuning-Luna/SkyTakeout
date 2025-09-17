@@ -14,4 +14,6 @@ public interface CategoryMapper {
   // 分页查询数据
   Page<CategoryQueryVO> selectPage(CategoryPageQueryDTO dto);
 
+  // 根据id删除分类（先确保此分类下没有dish/setmeal）
+  Integer deleteById(Long id);
 }

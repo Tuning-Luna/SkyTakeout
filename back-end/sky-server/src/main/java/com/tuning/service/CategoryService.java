@@ -10,4 +10,6 @@ public interface CategoryService {
   void addCategory(@Valid CategoryDTO dto);
 
   PageResult<CategoryQueryVO> page(@Valid CategoryPageQueryDTO dto);
+
+  void deleteById(Long id);
 }

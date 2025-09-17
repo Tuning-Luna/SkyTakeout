@@ -10,6 +10,8 @@ import com.Tuning.vo.CategoryQueryVO;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.tuning.mapper.CategoryMapper;
+import com.tuning.mapper.DishMapper;
+import com.tuning.mapper.SetmealMapper;
 import com.tuning.service.CategoryService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,9 +25,17 @@ public class CategoryServiceImpl implements CategoryService {
 
   final private CategoryMapper categoryMapper;
 
+  final private DishMapper dishMapper;
+
+  final private SetmealMapper setmealMapper;
+
   @Autowired
-  public CategoryServiceImpl(CategoryMapper categoryMapper) {
+  public CategoryServiceImpl(CategoryMapper categoryMapper,
+                             DishMapper dishMapper,
+                             SetmealMapper setmealMapper) {
     this.categoryMapper = categoryMapper;
+    this.dishMapper = dishMapper;
+    this.setmealMapper = setmealMapper;
   }
 
   @Override
@@ -56,4 +66,28 @@ public class CategoryServiceImpl implements CategoryService {
 
     return new PageResult<>(total, result);
   }
+
+  @Override
+  public void deleteById(Long id) {
+    // 1. 检查该分类下是否有菜品
+    Integer dishCount = dishMapper.countByCategoryId(id);
+    System.out.println(dishCount);
+    if (dishCount > 0) {
+      throw new BizException(HttpStatus.BAD_REQUEST, "该分类下有菜品，无法删除");
+    }
+
+    // 2. 检查该分类下是否有套餐
+    Integer setmealCount = setmealMapper.countByCategoryId(id);
+    System.out.println(setmealCount);
+    if (setmealCount > 0) {
+      throw new BizException(HttpStatus.BAD_REQUEST, "该分类下有套餐，无法删除");
+    }
+
+    // 3. 删除分类
+    Integer deleted = categoryMapper.deleteById(id);
+    if (deleted <= 0) {
+      throw new BizException(HttpStatus.BAD_REQUEST, "删除失败");
+    }
+  }
+
 }
