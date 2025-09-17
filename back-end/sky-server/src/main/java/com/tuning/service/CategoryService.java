@@ -7,6 +7,8 @@ import com.Tuning.result.PageResult;
 import com.Tuning.vo.CategoryQueryVO;
 import jakarta.validation.Valid;
 
+import java.util.List;
+
 public interface CategoryService {
   void addCategory(@Valid CategoryCreateDTO dto);
 
@@ -19,4 +21,6 @@ public interface CategoryService {
   void update(@Valid CategoryUpdateDTO dto);
 
   void startOrStop(Integer status, Long id);
+
+  List<CategoryQueryVO> list(Integer type);
 }

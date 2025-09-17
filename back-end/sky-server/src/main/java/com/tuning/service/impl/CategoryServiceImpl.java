@@ -140,4 +140,19 @@ public class CategoryServiceImpl implements CategoryService {
     categoryMapper.update(category);
   }
 
+  @Override
+  public List<CategoryQueryVO> list(Integer type) {
+    List<Category> list = categoryMapper.list(type);
+
+    // 转成CategoryQueryVO后返回
+    return list.stream()
+            .map(entity -> {
+              CategoryQueryVO vo = new CategoryQueryVO();
+              BeanUtils.copyProperties(entity, vo);
+              return vo;
+            })
+            .toList();
+  }
+
+
 }

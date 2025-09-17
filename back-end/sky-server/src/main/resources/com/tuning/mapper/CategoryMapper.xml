@@ -51,4 +51,13 @@
         WHERE id = #{id}
     </update>
 
+    <select id="list" resultType="com.Tuning.entity.Category">
+        SELECT * FROM category
+        WHERE status = 1
+        <if test="type != null">
+            and type = #{type}
+        </if>
+        order by sort ,create_time DESC
+    </select>
+
 </mapper>

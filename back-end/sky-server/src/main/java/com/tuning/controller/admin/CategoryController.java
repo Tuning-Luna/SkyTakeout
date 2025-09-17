@@ -11,6 +11,8 @@ import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/admin/category")
 public class CategoryController {
@@ -51,13 +53,19 @@ public class CategoryController {
   @PutMapping
   public ApiResult<String> update(@RequestBody @Valid CategoryUpdateDTO dto) {
     categoryService.update(dto);
-    return ApiResult.ok();
+    return ApiResult.ok("修改成功");
   }
 
   @PutMapping("/status/{status}")
   public ApiResult<String> startOrStop(@PathVariable("status") Integer status, Long id) {
     categoryService.startOrStop(status, id);
-    return ApiResult.ok();
+    return ApiResult.ok("修改成功");
+  }
+
+  @GetMapping("/list")
+  public ApiResult<List<CategoryQueryVO>> getByType(@RequestParam(required = false) Integer type) {
+    List<CategoryQueryVO> vos = categoryService.list(type);
+    return ApiResult.ok(vos);
   }
 
 }

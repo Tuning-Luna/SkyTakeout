@@ -7,6 +7,8 @@ import com.github.pagehelper.Page;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
+import java.util.List;
+
 @Mapper
 public interface CategoryMapper {
   // 插入一条分类数据
@@ -23,4 +25,7 @@ public interface CategoryMapper {
 
   // 更新
   void update(Category category);
+
+  // 列出数据，筛选type可选字段
+  List<Category> list(Integer type);
 }
