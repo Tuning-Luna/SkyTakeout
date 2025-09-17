@@ -8,7 +8,7 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class CategoryDTO {
+public class CategoryCreateDTO {
 
   // id 不允许前端传递，如果传递了也要重置，所以这里不用加校验
   private Long id;

@@ -1,7 +1,8 @@
 package com.tuning.controller.admin;
 
-import com.Tuning.dto.CategoryDTO;
+import com.Tuning.dto.CategoryCreateDTO;
 import com.Tuning.dto.CategoryPageQueryDTO;
+import com.Tuning.dto.CategoryUpdateDTO;
 import com.Tuning.result.ApiResult;
 import com.Tuning.result.PageResult;
 import com.Tuning.vo.CategoryQueryVO;
@@ -22,7 +23,7 @@ public class CategoryController {
   }
 
   @PostMapping
-  public ApiResult<String> addCategory(@RequestBody @Valid CategoryDTO dto) {
+  public ApiResult<String> addCategory(@RequestBody @Valid CategoryCreateDTO dto) {
     categoryService.addCategory(dto);
     return ApiResult.ok("添加成功");
   }
@@ -40,4 +41,23 @@ public class CategoryController {
     categoryService.deleteById(id);
     return ApiResult.ok("成功删除");
   }
+
+  @GetMapping("/{id}")
+  public ApiResult<CategoryQueryVO> getById(@PathVariable Long id) {
+    CategoryQueryVO vo = categoryService.selectById(id);
+    return ApiResult.ok(vo);
+  }
+
+  @PutMapping
+  public ApiResult<String> update(@RequestBody @Valid CategoryUpdateDTO dto) {
+    categoryService.update(dto);
+    return ApiResult.ok();
+  }
+
+  @PutMapping("/status/{status}")
+  public ApiResult<String> startOrStop(@PathVariable("status") Integer status, Long id) {
+    categoryService.startOrStop(status, id);
+    return ApiResult.ok();
+  }
+
 }

@@ -1,8 +1,9 @@
 package com.tuning.service.impl;
 
 import com.Tuning.context.BaseContext;
-import com.Tuning.dto.CategoryDTO;
+import com.Tuning.dto.CategoryCreateDTO;
 import com.Tuning.dto.CategoryPageQueryDTO;
+import com.Tuning.dto.CategoryUpdateDTO;
 import com.Tuning.entity.Category;
 import com.Tuning.exception.BizException;
 import com.Tuning.result.PageResult;
@@ -18,6 +19,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -39,7 +41,7 @@ public class CategoryServiceImpl implements CategoryService {
   }
 
   @Override
-  public void addCategory(CategoryDTO dto) {
+  public void addCategory(CategoryCreateDTO dto) {
     Category category = new Category();
 
     BeanUtils.copyProperties(dto, category);
@@ -88,6 +90,54 @@ public class CategoryServiceImpl implements CategoryService {
     if (deleted <= 0) {
       throw new BizException(HttpStatus.BAD_REQUEST, "删除失败");
     }
+  }
+
+  @Override
+  public CategoryQueryVO selectById(Long id) {
+    Category entity = categoryMapper.selectById(id);
+    CategoryQueryVO vo = new CategoryQueryVO();
+    BeanUtils.copyProperties(entity, vo);
+    return vo;
+  }
+
+  @Override
+  public void update(CategoryUpdateDTO dto) {
+    Category originEntity = categoryMapper.selectById(dto.getId());
+    if (originEntity == null) {
+      throw new BizException(HttpStatus.BAD_REQUEST, "要更新的数据不存在");
+    }
+
+    Category category = new Category();
+    BeanUtils.copyProperties(dto, category);
+
+    // 设置修改时间，修改人
+    category.setUpdateTime(LocalDateTime.now());
+    category.setUpdateUser(BaseContext.getCurrentId());
+
+    categoryMapper.update(category);
+  }
+
+  @Override
+  public void startOrStop(Integer status, Long id) {
+    if (status == null || (status != 0 && status != 1)) {
+      throw new BizException(HttpStatus.BAD_REQUEST, "状态值不合法");
+    }
+
+
+    Category originEntity = categoryMapper.selectById(id);
+    if (originEntity == null) {
+      throw new BizException(HttpStatus.BAD_REQUEST, "要更新的数据不存在");
+    }
+
+    Category category = new Category();
+    category.setId(id);
+    category.setStatus(status);
+
+    // 设置修改时间，修改人
+    category.setUpdateTime(LocalDateTime.now());
+    category.setUpdateUser(BaseContext.getCurrentId());
+
+    categoryMapper.update(category);
   }
 
 }

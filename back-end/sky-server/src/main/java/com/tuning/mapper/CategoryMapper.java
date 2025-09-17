@@ -5,6 +5,7 @@ import com.Tuning.entity.Category;
 import com.Tuning.vo.CategoryQueryVO;
 import com.github.pagehelper.Page;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 @Mapper
 public interface CategoryMapper {
@@ -15,5 +16,11 @@ public interface CategoryMapper {
   Page<CategoryQueryVO> selectPage(CategoryPageQueryDTO dto);
 
   // 根据id删除分类（先确保此分类下没有dish/setmeal）
-  Integer deleteById(Long id);
+  Integer deleteById(@Param("id") Long id);
+
+  // 根据id查询分类
+  Category selectById(@Param("id") Long id);
+
+  // 更新
+  void update(Category category);
 }
