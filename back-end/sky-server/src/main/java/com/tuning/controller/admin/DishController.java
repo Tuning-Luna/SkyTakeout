@@ -60,4 +60,10 @@ public class DishController {
     List<DishListVO> vos = dishService.getByCategoryId(categoryId);
     return ApiResult.ok(vos);
   }
+
+  @PostMapping("/status/{status}")
+  public ApiResult<String> changeStatus(@PathVariable Integer status, Long id) {
+    dishService.changeStatus(status, id);
+    return ApiResult.ok("修改成功");
+  }
 }
