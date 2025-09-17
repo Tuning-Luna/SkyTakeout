@@ -33,7 +33,7 @@ public class CategoryServiceImpl implements CategoryService {
     category.setStatus(1); // 默认启用
 
     Integer rows = categoryMapper.insertCategory(category);
-    if (rows != null) {
+    if (rows != 1) {
       throw new BizException(HttpStatus.BAD_REQUEST, "添加失败");
     }
   }
