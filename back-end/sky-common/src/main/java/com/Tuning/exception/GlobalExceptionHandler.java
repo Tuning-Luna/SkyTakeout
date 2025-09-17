@@ -41,6 +41,6 @@ public class GlobalExceptionHandler {
   @ExceptionHandler(Exception.class)
   public ResponseEntity<ApiResult<Void>> handleException(Exception ex) {
     HttpStatus status = HttpStatus.INTERNAL_SERVER_ERROR;
-    return new ResponseEntity<>(ApiResult.fail(status, "服务器内部错误"), status);
+    return new ResponseEntity<>(ApiResult.fail(status, ex.getMessage()), status);
   }
 }
