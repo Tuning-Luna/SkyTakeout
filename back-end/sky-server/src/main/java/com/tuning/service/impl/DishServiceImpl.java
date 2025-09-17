@@ -11,6 +11,7 @@ import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.tuning.mapper.DishFlavorMapper;
 import com.tuning.mapper.DishMapper;
+import com.tuning.mapper.SetmealDishMapper;
 import com.tuning.service.DishService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,10 +29,15 @@ public class DishServiceImpl implements DishService {
 
   final private DishFlavorMapper dishFlavorMapper;
 
+  final private SetmealDishMapper setmealDishMapper;
+
   @Autowired
-  public DishServiceImpl(DishMapper dishMapper, DishFlavorMapper dishFlavorMapper) {
+  public DishServiceImpl(DishMapper dishMapper,
+                         DishFlavorMapper dishFlavorMapper,
+                         SetmealDishMapper setmealDishMapper) {
     this.dishMapper = dishMapper;
     this.dishFlavorMapper = dishFlavorMapper;
+    this.setmealDishMapper = setmealDishMapper;
   }
 
   @Override
@@ -67,5 +73,28 @@ public class DishServiceImpl implements DishService {
 
     Page<DishPageQueryVO> page = dishMapper.pageQuery(dto);
     return new PageResult<>(page.getTotal(), page.getResult());
+  }
+
+  @Override
+  public void deleteBatch(List<Long> ids) {
+    // 起售中的菜品不能删除
+    for (Long id : ids) {
+      Dish dish = dishMapper.getById(id);
+      if (dish.getStatus() == 1) {
+        throw new BizException(HttpStatus.BAD_REQUEST, "此菜品正在出售，无法删除！");
+      }
+    }
+    // 当前菜品被套餐关联不能删除
+    List<Long> setmealIds = setmealDishMapper.getSetmealDishByDishIds(ids);
+    if (setmealIds != null && ! setmealIds.isEmpty()) {
+      throw new BizException(HttpStatus.BAD_REQUEST, "当前菜品被套餐关联，无法删除！");
+    }
+
+    for (Long id : ids) {
+      dishMapper.deleteById(id);
+
+      // 若可能，删除对应的口味
+      dishFlavorMapper.deleteByDishId(id);
+    }
   }
 }

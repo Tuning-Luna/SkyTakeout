@@ -9,6 +9,8 @@ import com.tuning.service.DishService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/admin/dish")
 public class DishController {
@@ -32,8 +34,10 @@ public class DishController {
   }
 
   @DeleteMapping
-  public ApiResult<String> delete() {
 
+
+  public ApiResult<String> delete(@RequestParam /*加上注解后前端传递字符串可解析成List*/ List<Long> ids) {
+    dishService.deleteBatch(ids);
     return ApiResult.ok();
   }
 

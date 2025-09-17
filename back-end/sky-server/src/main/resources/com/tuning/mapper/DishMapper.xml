@@ -33,4 +33,16 @@
             </if>
         </where>
     </select>
+
+    <select id="getById" resultType="com.Tuning.entity.Dish">
+        SELECT *
+        FROM dish
+        WHERE id = #{id}
+    </select>
+
+    <delete id="deleteById">
+        DELETE
+        from dish
+        WHERE id = #{id}
+    </delete>
 </mapper>
