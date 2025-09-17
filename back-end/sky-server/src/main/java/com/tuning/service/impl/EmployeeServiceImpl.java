@@ -18,7 +18,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -76,12 +75,12 @@ public class EmployeeServiceImpl implements EmployeeService {
     BeanUtils.copyProperties(employeeCreateDTO, employee);
 
     employee.setId(null);  // 重置ID，让数据库递增自己生成
-    employee.setCreateTime(LocalDateTime.now());
-    employee.setUpdateTime(LocalDateTime.now());
+    // employee.setCreateTime(LocalDateTime.now());
+    // employee.setUpdateTime(LocalDateTime.now());
     employee.setPassword(PasswordUtil.encrypt("123456")); // 密码默认123456
     employee.setStatus(1); // 默认是1，启用权限
-    employee.setCreateUser(BaseContext.getCurrentId());
-    employee.setUpdateUser(BaseContext.getCurrentId());
+    // employee.setCreateUser(BaseContext.getCurrentId());
+    // employee.setUpdateUser(BaseContext.getCurrentId());
 
     Integer rows = employeeMapper.insertEmployee(employee);
     if (rows != 1) {
@@ -105,7 +104,7 @@ public class EmployeeServiceImpl implements EmployeeService {
     Employee employee = Employee.builder()
             .id(Long.valueOf(id))
             .status(status)
-            .updateUser(BaseContext.getCurrentId())
+            // .updateUser(BaseContext.getCurrentId())
             .build();
 
     employeeMapper.updateEmployeeById(employee);
@@ -128,8 +127,8 @@ public class EmployeeServiceImpl implements EmployeeService {
     // 3. 执行更新
     Employee newEmp = new Employee();
     BeanUtils.copyProperties(employeeDTO, newEmp);
-    newEmp.setUpdateUser(BaseContext.getCurrentId());
-    newEmp.setUpdateTime(LocalDateTime.now());
+    // newEmp.setUpdateUser(BaseContext.getCurrentId());
+    // newEmp.setUpdateTime(LocalDateTime.now());
 
     int rows = employeeMapper.updateEmployeeById(newEmp);
     if (rows != 1) {

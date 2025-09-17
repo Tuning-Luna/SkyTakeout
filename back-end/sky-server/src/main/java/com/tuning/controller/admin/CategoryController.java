@@ -67,5 +67,4 @@ public class CategoryController {
     List<CategoryQueryVO> vos = categoryService.list(type);
     return ApiResult.ok(vos);
   }
-
 }

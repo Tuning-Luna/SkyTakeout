@@ -47,8 +47,8 @@ public class CategoryServiceImpl implements CategoryService {
     BeanUtils.copyProperties(dto, category);
 
     category.setId(null);
-    category.setCreateUser(BaseContext.getCurrentId());
-    category.setUpdateUser(BaseContext.getCurrentId());
+    // category.setCreateUser(BaseContext.getCurrentId());
+    // category.setUpdateUser(BaseContext.getCurrentId());
     category.setStatus(1); // 默认启用
 
     Integer rows = categoryMapper.insertCategory(category);
@@ -111,8 +111,8 @@ public class CategoryServiceImpl implements CategoryService {
     BeanUtils.copyProperties(dto, category);
 
     // 设置修改时间，修改人
-    category.setUpdateTime(LocalDateTime.now());
-    category.setUpdateUser(BaseContext.getCurrentId());
+    // category.setUpdateTime(LocalDateTime.now());
+    // category.setUpdateUser(BaseContext.getCurrentId());
 
     categoryMapper.update(category);
   }
@@ -153,6 +153,4 @@ public class CategoryServiceImpl implements CategoryService {
             })
             .toList();
   }
-
-
 }
