@@ -2,8 +2,10 @@ package com.tuning.controller.admin;
 
 import com.Tuning.dto.DishCreateDTO;
 import com.Tuning.dto.DishPageQueryDTO;
+import com.Tuning.dto.DishUpdateDTO;
 import com.Tuning.result.ApiResult;
 import com.Tuning.result.PageResult;
+import com.Tuning.vo.DishListVO;
 import com.Tuning.vo.DishPageQueryVO;
 import com.Tuning.vo.DishVO;
 import com.tuning.service.DishService;
@@ -47,4 +49,15 @@ public class DishController {
     return ApiResult.ok(vo);
   }
 
+  @PutMapping
+  public ApiResult<String> update(@RequestBody DishUpdateDTO dto) {
+    dishService.updateWithFlavor(dto);
+    return ApiResult.ok("修改成功");
+  }
+
+  @GetMapping("/list")
+  public ApiResult<List<DishListVO>> getByCategoryId(Long categoryId) {
+    List<DishListVO> vos = dishService.getByCategoryId(categoryId);
+    return ApiResult.ok(vos);
+  }
 }

@@ -3,10 +3,13 @@ package com.tuning.mapper;
 import com.Tuning.OperationType;
 import com.Tuning.dto.DishPageQueryDTO;
 import com.Tuning.entity.Dish;
+import com.Tuning.vo.DishListVO;
 import com.Tuning.vo.DishPageQueryVO;
 import com.github.pagehelper.Page;
 import com.tuning.annotation.AutoFill;
 import org.apache.ibatis.annotations.Mapper;
+
+import java.util.List;
 
 @Mapper
 public interface DishMapper {
@@ -22,4 +25,9 @@ public interface DishMapper {
   Dish getById(Long id);
 
   void deleteById(Long id);
+
+  @AutoFill(value = OperationType.UPDATE)
+  void update(Dish dish);
+
+  List<DishListVO> getByCategoryId(Long categoryId);
 }

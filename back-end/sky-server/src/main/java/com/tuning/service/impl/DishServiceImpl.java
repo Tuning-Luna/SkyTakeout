@@ -2,10 +2,12 @@ package com.tuning.service.impl;
 
 import com.Tuning.dto.DishCreateDTO;
 import com.Tuning.dto.DishPageQueryDTO;
+import com.Tuning.dto.DishUpdateDTO;
 import com.Tuning.entity.Dish;
 import com.Tuning.entity.DishFlavor;
 import com.Tuning.exception.BizException;
 import com.Tuning.result.PageResult;
+import com.Tuning.vo.DishListVO;
 import com.Tuning.vo.DishPageQueryVO;
 import com.Tuning.vo.DishVO;
 import com.github.pagehelper.Page;
@@ -109,6 +111,30 @@ public class DishServiceImpl implements DishService {
     BeanUtils.copyProperties(dish, vo);
     vo.setFlavors(flavors);
     return vo;
+  }
+
+  @Override
+  public void updateWithFlavor(DishUpdateDTO dto) {
+    Dish dish = new Dish();
+    BeanUtils.copyProperties(dto, dish);
+
+    // 更新dish
+    dishMapper.update(dish);
+
+    // 删除原有flavor
+    dishFlavorMapper.deleteByDishId(dish.getId());
+
+    // 插入新的flavor
+    List<DishFlavor> flavors = dto.getFlavors();
+    if (flavors != null && ! flavors.isEmpty()) {
+      flavors.forEach(dishFlavor -> dishFlavor.setDishId(dto.getId()));
+      dishFlavorMapper.insertBatch(flavors);
+    }
+  }
+
+  @Override
+  public List<DishListVO> getByCategoryId(Long categoryId) {
+    return dishMapper.getByCategoryId(categoryId);
   }
 
 

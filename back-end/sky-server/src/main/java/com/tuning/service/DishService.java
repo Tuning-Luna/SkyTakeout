@@ -2,7 +2,9 @@ package com.tuning.service;
 
 import com.Tuning.dto.DishCreateDTO;
 import com.Tuning.dto.DishPageQueryDTO;
+import com.Tuning.dto.DishUpdateDTO;
 import com.Tuning.result.PageResult;
+import com.Tuning.vo.DishListVO;
 import com.Tuning.vo.DishPageQueryVO;
 import com.Tuning.vo.DishVO;
 
@@ -16,4 +18,8 @@ public interface DishService {
   void deleteBatch(List<Long> ids);
 
   DishVO getWithFlavorById(Long id);
+
+  void updateWithFlavor(DishUpdateDTO dto);
+
+  List<DishListVO> getByCategoryId(Long categoryId);
 }
