@@ -5,6 +5,7 @@ import com.Tuning.dto.DishPageQueryDTO;
 import com.Tuning.result.ApiResult;
 import com.Tuning.result.PageResult;
 import com.Tuning.vo.DishPageQueryVO;
+import com.Tuning.vo.DishVO;
 import com.tuning.service.DishService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -34,11 +35,16 @@ public class DishController {
   }
 
   @DeleteMapping
-
-
   public ApiResult<String> delete(@RequestParam /*加上注解后前端传递字符串可解析成List*/ List<Long> ids) {
     dishService.deleteBatch(ids);
     return ApiResult.ok();
+  }
+
+
+  @GetMapping("/{id}")
+  public ApiResult<DishVO> getById(@PathVariable Long id) {
+    DishVO vo = dishService.getWithFlavorById(id);
+    return ApiResult.ok(vo);
   }
 
 }

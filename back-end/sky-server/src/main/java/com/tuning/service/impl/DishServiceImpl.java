@@ -7,6 +7,7 @@ import com.Tuning.entity.DishFlavor;
 import com.Tuning.exception.BizException;
 import com.Tuning.result.PageResult;
 import com.Tuning.vo.DishPageQueryVO;
+import com.Tuning.vo.DishVO;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.tuning.mapper.DishFlavorMapper;
@@ -97,4 +98,18 @@ public class DishServiceImpl implements DishService {
       dishFlavorMapper.deleteByDishId(id);
     }
   }
+
+  @Override
+  public DishVO getWithFlavorById(Long id) {
+    Dish dish = dishMapper.getById(id);
+
+    List<DishFlavor> flavors = dishFlavorMapper.getByDishId(id);
+
+    DishVO vo = new DishVO();
+    BeanUtils.copyProperties(dish, vo);
+    vo.setFlavors(flavors);
+    return vo;
+  }
+
+
 }
