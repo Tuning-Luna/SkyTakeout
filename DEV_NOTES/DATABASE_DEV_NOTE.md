@@ -462,3 +462,106 @@ order_detail表为订单明细表，用于存储C端用户的订单明细数据�
 
 
 
+# Redis
+
+下面是总结的简单示例：
+
+```sql
+-- 【string】
+-- 存在就修改，不存在就创建
+SET string test
+
+GET author
+
+-- 如果不存在才会创建，也就是说不会更新，只会创建
+SETNX author TuningLuna
+
+-- 30s后数据过期，无法get
+SETEX password 30 123456
+
+-- 【hash】
+-- 给表aZ新增一组键值对：a -> Z
+HSET aZ a A
+
+-- 取值
+HGET aZ a
+
+-- 删除键值对
+HDEL aZ a
+
+-- 打印所有key
+HKEYS aZ
+
+-- 打印所有val
+HVALS aZ
+
+-- 【list】可重复，头部插入，尾部弹出
+-- 在idea的展示中，上面是列表头，插入的时候插入这里
+-- 删除是从下面开始删除，相当于是队尾
+
+-- 批量插入1-6头部（左侧）
+LPUSH list 1 2 3 4 5 6
+
+-- 单独插入
+LPUSH list new
+
+-- 列出头部索引为【0,5】的元素
+LRANGE list 0 5
+
+-- 移除并返回最后一个元素（右侧，尾部）
+RPOP list
+
+-- 返回长度
+LLEN list
+
+-- set： 无序，不可重复
+-- 批量插入，返回实际受影响的行数
+SADD set 1 2 3 4 5 6 7 8 9 10
+SADD set2 2 4 6 8 10 12
+
+-- 返回集合中的所有成员
+SMEMBERS set
+
+-- 获取集合的成员数量
+SCARD set
+
+-- ∩：交集
+SINTER set set2
+
+-- ∪：并集
+SUNION set set2
+
+-- 批量移除成员
+SREM set 1 3
+
+-- 有序集合：不重复，score参数决定位置
+-- 批量添加，先写score，再写数据。a.score == 1.3 , b.score == 1.2 ......
+ZADD zset 1.3 a 1.2 b 1.1 c 1.0 d 0.9 e
+
+-- 分数从小到大排序排成的数组，返回下标[1,3]的数据 WITHSCORES：可选，连同score一起返回
+ZRANGE zset 1 3 WITHSCORES
+
+-- 给成员 a 增加 0.5 分：
+ZINCRBY zset 0.5 a
+
+-- 给成员 b 减少 0.01 分：
+ZINCRBY zset -0.01 b
+
+-- 批量删除成员
+ZREM zset a b
+
+-- 【通用】
+
+-- 查询所有的key，*代表全部
+KEYS *
+
+-- 确认某个key时是否存在
+EXISTS set
+
+-- 返回类型
+TYPE list
+
+-- 删除某个key
+DEL  set
+```
+
