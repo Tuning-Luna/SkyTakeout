@@ -40,6 +40,7 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "JUnit.HttpClientTest.getTest.executor": "Run",
     "JUnit.SkyServerApplicationTests.test.executor": "Run",
     "JUnit.SkyServerApplicationTests.testHash.executor": "Run",
     "JUnit.SkyServerApplicationTests.testString.executor": "Run",
@@ -90,7 +91,39 @@
       <recent name="com.tuning.mapper" />
     </key>
   </component>
-  <component name="RunManager" selected="Spring Boot.SkyServerApplication">
+  <component name="RunManager" selected="JUnit.HttpClientTest.postTest">
+    <configuration name="HttpClientTest.getTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="sky-server" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.tuning.skyserver.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.tuning.skyserver" />
+      <option name="MAIN_CLASS_NAME" value="com.tuning.skyserver.HttpClientTest" />
+      <option name="METHOD_NAME" value="getTest" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="HttpClientTest.postTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="sky-server" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.tuning.skyserver.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.tuning.skyserver" />
+      <option name="MAIN_CLASS_NAME" value="com.tuning.skyserver.HttpClientTest" />
+      <option name="METHOD_NAME" value="postTest" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="SkyServerApplicationTests.test" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="sky-server" />
       <extension name="coverage">
@@ -149,6 +182,8 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.HttpClientTest.postTest" />
+        <item itemvalue="JUnit.HttpClientTest.getTest" />
         <item itemvalue="JUnit.SkyServerApplicationTests.testHash" />
         <item itemvalue="JUnit.SkyServerApplicationTests.testString" />
         <item itemvalue="JUnit.SkyServerApplicationTests.test" />
@@ -197,7 +232,7 @@
       <workItem from="1758170181075" duration="421000" />
       <workItem from="1758170632599" duration="152000" />
       <workItem from="1758170800068" duration="1536000" />
-      <workItem from="1758184571792" duration="3487000" />
+      <workItem from="1758184571792" duration="6383000" />
     </task>
     <servers />
   </component>
