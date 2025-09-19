@@ -9,11 +9,10 @@ import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.util.EntityUtils;
 import org.junit.jupiter.api.Test;
-import org.springframework.boot.test.context.SpringBootTest;
 
 import java.io.IOException;
 
-@SpringBootTest
+// @SpringBootTest
 public class HttpClientTest {
 
   @Test
@@ -37,7 +36,7 @@ public class HttpClientTest {
 
     HttpPost request = new HttpPost("http://localhost:80");
 
-    // 构建请求体（JSON 字符串）
+    // 构建请求体(JSON 字符串)
     String json = "{\"name\":\"Tuning Luna\",\"age\":18}";
     StringEntity entity = new StringEntity(json, ContentType.APPLICATION_JSON);
     request.setEntity(entity);

@@ -5,7 +5,6 @@
 
 <!-- namespace 必须和接口全限定类名一致 -->
 <mapper namespace="com.tuning.mapper.SetmealDishMapper">
-
     <select id="getSetmealDishByDishIds" resultType="java.lang.Long">
         SELECT setmeal_id
         FROM setmeal_dish
@@ -14,4 +13,14 @@
             #{dishIds}
         </foreach>
     </select>
+
+    <insert id="insertBatch" parameterType="java.util.List">
+        INSERT INTO setmeal_dish
+        (setmeal_id, dish_id, name, price, copies)
+        VALUES
+        <foreach collection="list" item="item" separator=",">
+            (#{item.setmealId}, #{item.dishId}, #{item.name}, #{item.price}, #{item.copies})
+        </foreach>
+    </insert>
+
 </mapper>
