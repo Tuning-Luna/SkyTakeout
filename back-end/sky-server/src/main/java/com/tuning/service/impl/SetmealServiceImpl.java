@@ -1,8 +1,13 @@
 package com.tuning.service.impl;
 
 import com.Tuning.dto.SetmealCreateDTO;
+import com.Tuning.dto.SetmealPageQueryDTO;
 import com.Tuning.entity.Setmeal;
 import com.Tuning.entity.SetmealDish;
+import com.Tuning.result.PageResult;
+import com.Tuning.vo.SetmealVO;
+import com.github.pagehelper.Page;
+import com.github.pagehelper.PageHelper;
 import com.tuning.mapper.SetmealDishMapper;
 import com.tuning.mapper.SetmealMapper;
 import com.tuning.service.SetmealService;
@@ -47,5 +52,13 @@ public class SetmealServiceImpl implements SetmealService {
 
     // 批量插入菜品
     setmealDishMapper.insertBatch(setmealDishes);
+  }
+
+  @Override
+  public PageResult<SetmealVO> page(SetmealPageQueryDTO dto) {
+    PageHelper.startPage(dto.getPage(), dto.getPageSize());
+
+    Page<SetmealVO> page = setmealMapper.pageQuery(dto);
+    return new PageResult<>(page.getTotal(), page.getResult());
   }
 }

@@ -1,7 +1,10 @@
 package com.tuning.mapper;
 
 import com.Tuning.OperationType;
+import com.Tuning.dto.SetmealPageQueryDTO;
 import com.Tuning.entity.Setmeal;
+import com.Tuning.vo.SetmealVO;
+import com.github.pagehelper.Page;
 import com.tuning.annotation.AutoFill;
 import org.apache.ibatis.annotations.Mapper;
 
@@ -13,4 +16,6 @@ public interface SetmealMapper {
 
   @AutoFill(value = OperationType.INSERT)
   void insert(Setmeal setmeal);
+
+  Page<SetmealVO> pageQuery(SetmealPageQueryDTO dto);
 }

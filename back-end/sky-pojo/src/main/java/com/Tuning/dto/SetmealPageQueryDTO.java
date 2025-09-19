@@ -1,0 +1,25 @@
+package com.Tuning.dto;
+
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
+public class SetmealPageQueryDTO {
+
+  private int page;
+
+  private int pageSize;
+
+  private String name;
+
+  // 分类id
+  private Integer categoryId;
+
+  // 状态 0表示禁用 1表示启用
+  private Integer status;
+}
