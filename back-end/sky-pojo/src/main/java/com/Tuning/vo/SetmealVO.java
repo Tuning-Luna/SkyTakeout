@@ -1,6 +1,7 @@
 package com.Tuning.vo;
 
 import com.Tuning.entity.SetmealDish;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -38,6 +39,7 @@ public class SetmealVO {
   private String image;
 
   // 更新时间
+  @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
   private LocalDateTime updateTime;
 
   // 分类名称

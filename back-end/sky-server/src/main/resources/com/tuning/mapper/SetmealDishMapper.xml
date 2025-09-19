@@ -23,4 +23,17 @@
         </foreach>
     </insert>
 
+    <delete id="deleteBySetmealid">
+        DELETE
+        FROM setmeal_dish
+        WHERE setmeal_id = #{setmealId}
+    </delete>
+
+    <select id="getBySetmealId" resultType="com.Tuning.entity.SetmealDish">
+        SELECT *
+        FROM setmeal_dish
+        WHERE setmeal_id = #{setmealId}
+    </select>
+
+
 </mapper>

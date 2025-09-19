@@ -2,8 +2,10 @@ package com.tuning.service.impl;
 
 import com.Tuning.dto.SetmealCreateDTO;
 import com.Tuning.dto.SetmealPageQueryDTO;
+import com.Tuning.dto.SetmealUpdateDTO;
 import com.Tuning.entity.Setmeal;
 import com.Tuning.entity.SetmealDish;
+import com.Tuning.exception.BizException;
 import com.Tuning.result.PageResult;
 import com.Tuning.vo.SetmealVO;
 import com.github.pagehelper.Page;
@@ -13,6 +15,7 @@ import com.tuning.mapper.SetmealMapper;
 import com.tuning.service.SetmealService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -61,4 +64,61 @@ public class SetmealServiceImpl implements SetmealService {
     Page<SetmealVO> page = setmealMapper.pageQuery(dto);
     return new PageResult<>(page.getTotal(), page.getResult());
   }
+
+  @Override
+  @Transactional
+  public void deleteBatch(List<Integer> ids) {
+
+    // 检查是否有正在售卖的
+    ids.forEach(setmealId -> {
+      Setmeal setmeal = setmealMapper.getById(Long.valueOf(setmealId));
+      if (setmeal.getStatus() == 1) {
+        throw new BizException(HttpStatus.BAD_REQUEST, "该套餐正在售卖，无法删除");
+      }
+    });
+
+
+    ids.forEach(setmealId -> {
+      // 删除套餐
+      setmealMapper.deleteById(Long.valueOf(setmealId));
+
+      // 删除套餐对应的菜品
+      setmealDishMapper.deleteBySetmealid(setmealId);
+    });
+  }
+
+  @Override
+  public SetmealVO getByIdWithDish(Long id) {
+    Setmeal setmeal = setmealMapper.getById(id);
+    List<SetmealDish> setmealDishes = setmealDishMapper.getBySetmealId(id);
+
+    SetmealVO vo = new SetmealVO();
+    BeanUtils.copyProperties(setmeal, vo);
+    vo.setSetmealDishes(setmealDishes);
+    return vo;
+  }
+
+  @Override
+  @Transactional
+  public void update(SetmealUpdateDTO dto) {
+    Setmeal setmeal = new Setmeal();
+    BeanUtils.copyProperties(dto, setmeal);
+
+    // 更新setmeal
+    setmealMapper.update(setmeal);
+
+    // 删除所有关联的setmeal_dish
+    setmealDishMapper.deleteBySetmealid(Math.toIntExact(setmeal.getId()));
+
+    // 回填id
+    List<SetmealDish> setmealDishes = dto.getSetmealDishes();
+    setmealDishes.forEach(setmealDish -> {
+      setmealDish.setSetmealId(setmeal.getId());
+      setmealDish.setId(null);
+    });
+
+    // 重新插入
+    setmealDishMapper.insertBatch(setmealDishes);
+  }
+
 }

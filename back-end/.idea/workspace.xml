@@ -76,6 +76,9 @@
     ]
   }
 }</component>
+  <component name="ReactorSettings">
+    <option name="notificationShown" value="true" />
+  </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="E:\FrontEndProject\SkyTakeout\back-end\sky-server\src\main\resources\com\tuning\mapper" />
@@ -234,7 +237,7 @@
       <workItem from="1758170632599" duration="152000" />
       <workItem from="1758170800068" duration="1536000" />
       <workItem from="1758184571792" duration="8499000" />
-      <workItem from="1758244139695" duration="6652000" />
+      <workItem from="1758244139695" duration="11361000" />
     </task>
     <servers />
   </component>

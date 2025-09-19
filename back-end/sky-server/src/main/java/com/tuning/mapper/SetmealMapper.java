@@ -18,4 +18,11 @@ public interface SetmealMapper {
   void insert(Setmeal setmeal);
 
   Page<SetmealVO> pageQuery(SetmealPageQueryDTO dto);
+
+  Setmeal getById(Long setmealId);
+
+  void deleteById(Long setmealId);
+
+  @AutoFill(value = OperationType.UPDATE)
+  void update(Setmeal setmeal);
 }
