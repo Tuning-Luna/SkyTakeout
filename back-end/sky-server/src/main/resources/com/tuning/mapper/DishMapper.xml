@@ -82,5 +82,12 @@
         FROM dish
         WHERE category_id = #{categoryId}
     </select>
+    <select id="getBySetmealId" resultType="com.Tuning.entity.Dish">
+        SELECT d.*
+        FROM dish d
+                 LEFT JOIN setmeal_dish sd on d.id = sd.dish_id
+        WHERE sd.setmeal_id = #{setmealId}
+
+    </select>
 
 </mapper>

@@ -3,6 +3,7 @@ package com.tuning.service.impl;
 import com.Tuning.dto.SetmealCreateDTO;
 import com.Tuning.dto.SetmealPageQueryDTO;
 import com.Tuning.dto.SetmealUpdateDTO;
+import com.Tuning.entity.Dish;
 import com.Tuning.entity.Setmeal;
 import com.Tuning.entity.SetmealDish;
 import com.Tuning.exception.BizException;
@@ -10,6 +11,7 @@ import com.Tuning.result.PageResult;
 import com.Tuning.vo.SetmealVO;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
+import com.tuning.mapper.DishMapper;
 import com.tuning.mapper.SetmealDishMapper;
 import com.tuning.mapper.SetmealMapper;
 import com.tuning.service.SetmealService;
@@ -25,12 +27,16 @@ import java.util.List;
 public class SetmealServiceImpl implements SetmealService {
 
   final private SetmealMapper setmealMapper;
-  private final SetmealDishMapper setmealDishMapper;
+  final private SetmealDishMapper setmealDishMapper;
+  final private DishMapper dishMapper;
 
   @Autowired
-  public SetmealServiceImpl(SetmealMapper setmealMapper, SetmealDishMapper setmealDishMapper) {
+  public SetmealServiceImpl(SetmealMapper setmealMapper,
+                            SetmealDishMapper setmealDishMapper,
+                            DishMapper dishMapper) {
     this.setmealMapper = setmealMapper;
     this.setmealDishMapper = setmealDishMapper;
+    this.dishMapper = dishMapper;
   }
 
   @Override
@@ -119,6 +125,27 @@ public class SetmealServiceImpl implements SetmealService {
 
     // 重新插入
     setmealDishMapper.insertBatch(setmealDishes);
+  }
+
+
+  @Override
+  public void changeStatus(Integer status, Long id) {
+    // 如果要起售，先看看里面的菜有没有在停售状态的
+    if (status == 1) {
+      List<Dish> dishList = dishMapper.getBySetmealId(id);
+      if (dishList != null && ! dishList.isEmpty()) {
+        dishList.forEach(dish -> {
+          if (0 == dish.getStatus()) {
+            throw new BizException(HttpStatus.BAD_REQUEST, "此套菜中有菜品未上架，无法上架此套菜");
+          }
+        });
+      }
+    }
+    Setmeal setmeal = Setmeal.builder()
+            .id(id)
+            .status(status)
+            .build();
+    setmealMapper.update(setmeal);
   }
 
 }

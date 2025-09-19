@@ -54,4 +54,11 @@ public class SetmealCOntroller {
     return ApiResult.ok();
   }
 
+  @PostMapping("status/{status}")
+  public ApiResult<String>
+  changeStatus(@PathVariable Integer status, Long id) {
+    setmealService.changeStatus(status, id);
+    return ApiResult.ok();
+  }
+
 }
