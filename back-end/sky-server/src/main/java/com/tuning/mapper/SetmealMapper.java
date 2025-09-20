@@ -3,10 +3,13 @@ package com.tuning.mapper;
 import com.Tuning.OperationType;
 import com.Tuning.dto.SetmealPageQueryDTO;
 import com.Tuning.entity.Setmeal;
+import com.Tuning.vo.DishItemVO;
 import com.Tuning.vo.SetmealVO;
 import com.github.pagehelper.Page;
 import com.tuning.annotation.AutoFill;
 import org.apache.ibatis.annotations.Mapper;
+
+import java.util.List;
 
 @Mapper
 public interface SetmealMapper {
@@ -25,4 +28,8 @@ public interface SetmealMapper {
 
   @AutoFill(value = OperationType.UPDATE)
   void update(Setmeal setmeal);
+
+  List<Setmeal> list(Setmeal setmeal);
+
+  List<DishItemVO> getDishItemBySetmealId(Long id);
 }

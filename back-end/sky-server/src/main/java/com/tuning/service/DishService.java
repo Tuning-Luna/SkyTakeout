@@ -3,6 +3,7 @@ package com.tuning.service;
 import com.Tuning.dto.DishCreateDTO;
 import com.Tuning.dto.DishPageQueryDTO;
 import com.Tuning.dto.DishUpdateDTO;
+import com.Tuning.entity.Dish;
 import com.Tuning.result.PageResult;
 import com.Tuning.vo.DishListVO;
 import com.Tuning.vo.DishPageQueryVO;
@@ -24,4 +25,6 @@ public interface DishService {
   List<DishListVO> getByCategoryId(Long categoryId);
 
   void changeStatus(Integer status, Long id);
+
+  List<DishVO> listWishFlavor(Dish dish);
 }

@@ -8,6 +8,7 @@ import com.Tuning.entity.Setmeal;
 import com.Tuning.entity.SetmealDish;
 import com.Tuning.exception.BizException;
 import com.Tuning.result.PageResult;
+import com.Tuning.vo.DishItemVO;
 import com.Tuning.vo.SetmealVO;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
@@ -146,6 +147,17 @@ public class SetmealServiceImpl implements SetmealService {
             .status(status)
             .build();
     setmealMapper.update(setmeal);
+  }
+
+  @Override
+  public List<Setmeal> list(Setmeal setmeal) {
+    List<Setmeal> list = setmealMapper.list(setmeal);
+    return list;
+  }
+
+  @Override
+  public List<DishItemVO> getDishItemById(Long id) {
+    return setmealMapper.getDishItemBySetmealId(id);
   }
 
 }
