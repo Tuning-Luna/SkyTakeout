@@ -93,9 +93,9 @@
       <recent name="com.tuning" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="com.tuning.mapper" />
       <recent name="com.tuning.controller.user" />
       <recent name="com.Tuning.dto" />
-      <recent name="com.tuning.mapper" />
     </key>
   </component>
   <component name="RunManager" selected="Spring Boot.SkyServerApplication">
@@ -245,7 +245,7 @@
       <workItem from="1758280953766" duration="2402000" />
       <workItem from="1758356678291" duration="4334000" />
       <workItem from="1758371115235" duration="2211000" />
-      <workItem from="1758625126931" duration="10608000" />
+      <workItem from="1758625126931" duration="16350000" />
     </task>
     <servers />
   </component>
