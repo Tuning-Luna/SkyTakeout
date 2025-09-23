@@ -40,7 +40,6 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
     // 只能查询自己的购物车数据
     shoppingCart.setUserId(BaseContext.getCurrentId());
 
-
     // 判断当前商品是否在购物车中
     List<ShoppingCart> shoppingCartList = shoppingCartMapper.list(shoppingCart);
 
@@ -72,5 +71,11 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
       shoppingCart.setCreateTime(LocalDateTime.now());
       shoppingCartMapper.insert(shoppingCart);
     }
+  }
+
+  @Override
+  public List<ShoppingCart> showShoppingCart() {
+    ShoppingCart build = ShoppingCart.builder().userId(BaseContext.getCurrentId()).build();
+    return shoppingCartMapper.list(build);
   }
 }

@@ -1,13 +1,13 @@
 package com.tuning.controller.user;
 
 import com.Tuning.dto.ShoppingCartDTO;
+import com.Tuning.entity.ShoppingCart;
 import com.Tuning.result.ApiResult;
 import com.tuning.service.impl.ShoppingCartServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/user/shoppingCart")
@@ -23,5 +23,10 @@ public class ShoppingCartController {
   public ApiResult<String> add(@RequestBody ShoppingCartDTO shoppingCartDTO) {
     shoppingCartService.addShoppingCart(shoppingCartDTO);
     return ApiResult.ok();
+  }
+
+  @GetMapping("/list")
+  public ApiResult<List<ShoppingCart>> list() {
+    return ApiResult.ok(shoppingCartService.showShoppingCart());
   }
 }
