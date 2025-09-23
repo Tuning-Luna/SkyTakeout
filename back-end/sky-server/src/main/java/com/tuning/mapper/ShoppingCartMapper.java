@@ -18,4 +18,10 @@ public interface ShoppingCartMapper {
 
   // 条件查询
   List<ShoppingCart> list(ShoppingCart shoppingCart);
+
+  // 删除userId的全部购物车数据
+  void deleteByUserId(Long userId);
+
+  // 根据id删除
+  void deleteById(Long id);
 }

@@ -29,4 +29,17 @@ public class ShoppingCartController {
   public ApiResult<List<ShoppingCart>> list() {
     return ApiResult.ok(shoppingCartService.showShoppingCart());
   }
+
+  @DeleteMapping("/clean")
+  public ApiResult<String> clear() {
+    shoppingCartService.clear();
+    return ApiResult.ok();
+  }
+
+  // 删除购物车中一个商品
+  @PostMapping("/sub")
+  public ApiResult<String> sub(@RequestBody ShoppingCartDTO shoppingCartDTO) {
+    shoppingCartService.subShoppingCart(shoppingCartDTO);
+    return ApiResult.ok();
+  }
 }
