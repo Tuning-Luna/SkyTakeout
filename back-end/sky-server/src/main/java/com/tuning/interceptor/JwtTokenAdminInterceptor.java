@@ -31,9 +31,11 @@ public class JwtTokenAdminInterceptor implements HandlerInterceptor {
       throw new BizException(HttpStatus.NON_AUTHORITATIVE_INFORMATION, "token不合法");
     }
 
+
     Map<String, Object> emp = JWTUtil.parseToken(token);
     Long empId = Long.valueOf(emp.get("id").toString());
     BaseContext.setCurrentId(empId);
+
     return true;
   }
 }

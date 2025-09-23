@@ -19,6 +19,7 @@ public class WebMvcConfiguration extends WebMvcConfigurationSupport {
   protected void addInterceptors(InterceptorRegistry registry) {
     registry.addInterceptor(jwtTokenAdminInterceptor)
             .addPathPatterns("/admin/**")
+            .addPathPatterns("/user/**")
             .excludePathPatterns("/admin/employee/login");
     // 所有admin开头的，不管基层，都需要拦截，除了/admin/employee/login（登录）
   }
