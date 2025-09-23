@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- namespace 必须和接口全限定类名一致 -->
+<mapper namespace="com.tuning.mapper.AddressBookMapper">
+
+    <select id="list" resultType="com.Tuning.entity.AddressBook">
+        SELECT * FROM address_book
+        <where>
+            <if test="userId != null">
+                AND user_id = #{userId}
+            </if>
+            <if test="phone != null">
+                AND phone = #{phone}
+            </if>
+            <if test="isDefault != null">
+                AND is_default = #{isDefault}
+            </if>
+        </where>
+    </select>
+
+    <insert id="insert" parameterType="com.Tuning.entity.AddressBook">
+        INSERT INTO address_book
+        (user_id, consignee, phone, sex, province_code, province_name,
+         city_code, city_name, district_code, district_name, detail,
+         label, is_default)
+        VALUES (#{userId}, #{consignee}, #{phone}, #{sex}, #{provinceCode}, #{provinceName},
+                #{cityCode}, #{cityName}, #{districtCode}, #{districtName}, #{detail},
+                #{label}, #{isDefault})
+    </insert>
+
+    <select id="getById" resultType="com.Tuning.entity.AddressBook">
+        SELECT *
+        FROM address_book
+        WHERE id = #{id}
+    </select>
+
+    <update id="update">
+        UPDATE address_book
+        <set>
+            <if test="consignee != null">
+                consignee = #{consignee},
+            </if>
+            <if test="sex != null">
+                sex = #{sex},
+            </if>
+            <if test="phone != null">
+                phone = #{phone},
+            </if>
+            <if test="detail != null">
+                detail = #{detail},
+            </if>
+            <if test="label != null">
+                label = #{label},
+            </if>
+            <if test="isDefault != null">
+                is_default = #{isDefault},
+            </if>
+        </set>
+        WHERE id = #{id}
+    </update>
+
+    <update id="updateIsDefaultByUserId">
+        UPDATE address_book
+        set is_default = #{isDefault}
+        WHERE user_id = #{userId}
+    </update>
+
+    <delete id="deleteById">
+        DELETE
+        FROM address_book
+        WHERE id = #{id}
+    </delete>
+
+</mapper>
