@@ -15,4 +15,9 @@
             #{od.number},#{od.amount},#{od.image})
         </foreach>
     </insert>
+    <select id="getByOrderId" resultType="com.Tuning.entity.OrderDetail">
+        SELECT *
+        FROM order_detail
+        WHERE order_id = #{orderId}
+    </select>
 </mapper>

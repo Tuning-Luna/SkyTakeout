@@ -1,8 +1,12 @@
 package com.tuning.service;
 
 import com.Tuning.dto.OrdersSubmitDTO;
+import com.Tuning.result.PageResult;
 import com.Tuning.vo.OrderSubmitVO;
+import com.Tuning.vo.OrderVO;
 
 public interface OrderService {
   OrderSubmitVO submitOrder(OrdersSubmitDTO ordersSubmitDTO);
+
+  PageResult<OrderVO> pageQuery4User(int pageNum, int pageSize, Integer status);
 }

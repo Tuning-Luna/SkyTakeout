@@ -1,13 +1,18 @@
 package com.tuning.service.impl;
 
 import com.Tuning.context.BaseContext;
+import com.Tuning.dto.OrdersPageQueryDTO;
 import com.Tuning.dto.OrdersSubmitDTO;
 import com.Tuning.entity.AddressBook;
 import com.Tuning.entity.OrderDetail;
 import com.Tuning.entity.Orders;
 import com.Tuning.entity.ShoppingCart;
 import com.Tuning.exception.BizException;
+import com.Tuning.result.PageResult;
 import com.Tuning.vo.OrderSubmitVO;
+import com.Tuning.vo.OrderVO;
+import com.github.pagehelper.Page;
+import com.github.pagehelper.PageHelper;
 import com.tuning.mapper.AddressBookMapper;
 import com.tuning.mapper.OrderDetailMapper;
 import com.tuning.mapper.OrderMapper;
@@ -106,5 +111,38 @@ public class OrderServiceImpl implements OrderService {
 
     return orderSubmitVO;
   }
+
+  @Override
+  public PageResult<OrderVO> pageQuery4User(int pageNum, int pageSize, Integer status) {
+    // 设置分页
+    PageHelper.startPage(pageNum, pageSize);
+
+    OrdersPageQueryDTO ordersPageQueryDTO = new OrdersPageQueryDTO();
+    ordersPageQueryDTO.setUserId(BaseContext.getCurrentId());
+    ordersPageQueryDTO.setStatus(status);
+
+    // 分页条件查询
+    Page<Orders> page = orderMapper.pageQuery(ordersPageQueryDTO);
+
+    List<OrderVO> list = new ArrayList<>();
+
+    // 查询出订单明细，并封装入OrderVO进行响应
+    if (page != null && page.getTotal() > 0) {
+      for (Orders orders : page) {
+        Long orderId = orders.getId();// 订单id
+
+        // 查询订单明细
+        List<OrderDetail> orderDetails = orderDetailMapper.getByOrderId(orderId);
+
+        OrderVO orderVO = new OrderVO();
+        BeanUtils.copyProperties(orders, orderVO);
+        orderVO.setOrderDetailList(orderDetails);
+
+        list.add(orderVO);
+      }
+    }
+    return new PageResult<>(page.getTotal(), list);
+  }
+
 
 }

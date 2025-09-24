@@ -2,12 +2,11 @@ package com.tuning.controller.user;
 
 import com.Tuning.dto.OrdersSubmitDTO;
 import com.Tuning.result.ApiResult;
+import com.Tuning.result.PageResult;
 import com.Tuning.vo.OrderSubmitVO;
+import com.Tuning.vo.OrderVO;
 import com.tuning.service.OrderService;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController("userOrderController")
 @RequestMapping("/user/order")
@@ -23,5 +22,11 @@ public class OrderController {
   public ApiResult<OrderSubmitVO> submit(@RequestBody OrdersSubmitDTO ordersSubmitDTO) {
     OrderSubmitVO orderSubmitVO = orderService.submitOrder(ordersSubmitDTO);
     return ApiResult.ok(orderSubmitVO);
+  }
+
+  @GetMapping("/historyOrders")
+  public ApiResult<PageResult<OrderVO>> page(int page, int pageSize, Integer status) {
+    PageResult<OrderVO> pageResult = orderService.pageQuery4User(page, pageSize, status);
+    return ApiResult.ok(pageResult);
   }
 }
