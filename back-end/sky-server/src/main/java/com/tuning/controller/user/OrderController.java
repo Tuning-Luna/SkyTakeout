@@ -35,4 +35,10 @@ public class OrderController {
     OrderVO orderVO = orderService.details(id);
     return ApiResult.ok(orderVO);
   }
+
+  @PutMapping("/cancel/{id}")
+  public ApiResult<String> cancel(@PathVariable("id") Long id) throws Exception {
+    orderService.userCancelById(id);
+    return ApiResult.ok();
+  }
 }
