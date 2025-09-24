@@ -316,6 +316,24 @@ public class OrderServiceImpl implements OrderService {
     orderMapper.update(orders);
   }
 
+  @Override
+  public void delivery(Long id) {
+    // 根据id查询订单
+    Orders ordersDB = orderMapper.getById(id);
+
+    // 校验订单是否存在，并且状态为3
+    if (ordersDB == null || ! ordersDB.getStatus().equals(Orders.CONFIRMED)) {
+      throw new BizException(HttpStatus.BAD_REQUEST, "派送失败");
+    }
+
+    Orders orders = new Orders();
+    orders.setId(ordersDB.getId());
+    // 更新订单状态,状态转为派送中
+    orders.setStatus(Orders.DELIVERY_IN_PROGRESS);
+
+    orderMapper.update(orders);
+  }
+
   private List<OrderVO> getOrderVOList(Page<Orders> page) {
     // 需要返回订单菜品信息，自定义OrderVO响应结果
     List<OrderVO> orderVOList = new ArrayList<>();
