@@ -5,19 +5,16 @@
 
 <!-- namespace 必须和接口全限定类名一致 -->
 <mapper namespace="com.tuning.mapper.ShoppingCartMapper">
-
     <update id="updateNumberById">
         UPDATE shopping_cart
         set number = #{number}
         WHERE id = #{id}
     </update>
-
     <insert id="insert">
         INSERT INTO shopping_cart (name, user_id, dish_id, setmeal_id, dish_flavor, number, amount, image, create_time)
         VALUES (#{name}, #{userId}, #{dishId}, #{setmealId}, #{dishFlavor}, #{number}, #{amount}, #{image},
                 #{createTime})
     </insert>
-
     <select id="list" resultType="com.Tuning.entity.ShoppingCart">
         SELECT * FROM shopping_cart
         <where>
@@ -36,7 +33,6 @@
         </where>
         ORDER BY create_time DESC
     </select>
-
     <delete id="deleteByUserId">
         DELETE
         FROM shopping_cart
@@ -47,4 +43,12 @@
         FROM shopping_cart
         WHERE id = #{id}
     </delete>
+    <insert id="insertBatch">
+        INSERT INTO shopping_cart
+        (name, image, user_id, dish_id, setmeal_id, dish_flavor, number, amount, create_time)
+        VALUES
+        <foreach collection="shoppingCartList" item="sc" separator=",">
+            (#{sc.name},#{sc.image},#{sc.userId},#{sc.dishId},#{sc.setmealId},#{sc.dishFlavor},#{sc.number},#{sc.amount},#{sc.createTime})
+        </foreach>
+    </insert>
 </mapper>

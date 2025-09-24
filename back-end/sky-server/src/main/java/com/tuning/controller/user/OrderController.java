@@ -41,4 +41,10 @@ public class OrderController {
     orderService.userCancelById(id);
     return ApiResult.ok();
   }
+
+  @PostMapping("/repetition/{id}")
+  public ApiResult<String> repetition(@PathVariable Long id) {
+    orderService.repetition(id);
+    return ApiResult.ok();
+  }
 }

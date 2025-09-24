@@ -24,4 +24,6 @@ public interface ShoppingCartMapper {
 
   // 根据id删除
   void deleteById(Long id);
+
+  void insertBatch(List<ShoppingCart> shoppingCartList);
 }
