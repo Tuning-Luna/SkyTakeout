@@ -1,5 +1,6 @@
 package com.tuning.controller.admin;
 
+import com.Tuning.dto.OrdersCancelDTO;
 import com.Tuning.dto.OrdersConfirmDTO;
 import com.Tuning.dto.OrdersPageQueryDTO;
 import com.Tuning.dto.OrdersRejectionDTO;
@@ -47,6 +48,12 @@ public class OrderController {
   @PutMapping("/rejection")
   public ApiResult<String> rejection(@RequestBody OrdersRejectionDTO ordersRejectionDTO) throws Exception {
     orderService.rejection(ordersRejectionDTO);
+    return ApiResult.ok();
+  }
+
+  @PutMapping("/cancel")
+  public ApiResult<String> cancel(@RequestBody OrdersCancelDTO ordersCancelDTO) throws Exception {
+    orderService.cancel(ordersCancelDTO);
     return ApiResult.ok();
   }
 }
