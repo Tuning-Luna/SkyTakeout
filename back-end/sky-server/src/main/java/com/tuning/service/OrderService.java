@@ -1,5 +1,6 @@
 package com.tuning.service;
 
+import com.Tuning.dto.OrdersPageQueryDTO;
 import com.Tuning.dto.OrdersSubmitDTO;
 import com.Tuning.result.PageResult;
 import com.Tuning.vo.OrderSubmitVO;
@@ -15,4 +16,6 @@ public interface OrderService {
   void userCancelById(Long id);
 
   void repetition(Long id);
+
+  PageResult<OrderVO> conditionSearch(OrdersPageQueryDTO ordersPageQueryDTO);
 }
