@@ -14,4 +14,6 @@ public interface OrderMapper {
   Orders getById(Long id);
 
   void update(Orders orders);
+
+  Integer countStatus(Integer status);
 }

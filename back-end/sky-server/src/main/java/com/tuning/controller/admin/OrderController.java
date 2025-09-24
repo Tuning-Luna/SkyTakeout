@@ -3,6 +3,7 @@ package com.tuning.controller.admin;
 import com.Tuning.dto.OrdersPageQueryDTO;
 import com.Tuning.result.ApiResult;
 import com.Tuning.result.PageResult;
+import com.Tuning.vo.OrderStatisticsVO;
 import com.Tuning.vo.OrderVO;
 import com.tuning.service.OrderService;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -23,5 +24,11 @@ public class OrderController {
   public ApiResult<PageResult<OrderVO>> conditionSearch(OrdersPageQueryDTO ordersPageQueryDTO) {
     PageResult<OrderVO> pageResult = orderService.conditionSearch(ordersPageQueryDTO);
     return ApiResult.ok(pageResult);
+  }
+
+  @GetMapping("/statistics")
+  public ApiResult<OrderStatisticsVO> statistics() {
+    OrderStatisticsVO orderStatisticsVO = orderService.statistics();
+    return ApiResult.ok(orderStatisticsVO);
   }
 }
