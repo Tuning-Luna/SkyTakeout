@@ -9,4 +9,6 @@ public interface OrderService {
   OrderSubmitVO submitOrder(OrdersSubmitDTO ordersSubmitDTO);
 
   PageResult<OrderVO> pageQuery4User(int pageNum, int pageSize, Integer status);
+
+  OrderVO details(Long id);
 }

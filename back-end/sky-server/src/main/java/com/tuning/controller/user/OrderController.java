@@ -29,4 +29,10 @@ public class OrderController {
     PageResult<OrderVO> pageResult = orderService.pageQuery4User(page, pageSize, status);
     return ApiResult.ok(pageResult);
   }
+
+  @GetMapping("/orderDetail/{id}")
+  public ApiResult<OrderVO> details(@PathVariable("id") Long id) {
+    OrderVO orderVO = orderService.details(id);
+    return ApiResult.ok(orderVO);
+  }
 }

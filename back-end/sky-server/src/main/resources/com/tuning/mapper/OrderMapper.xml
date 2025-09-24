@@ -39,5 +39,10 @@
         </where>
         ORDER BY order_time DESC
     </select>
+    <select id="getById" resultType="com.Tuning.entity.Orders">
+        SELECT *
+        FROM orders
+        WHERE id = #{id}
+    </select>
 
 </mapper>
