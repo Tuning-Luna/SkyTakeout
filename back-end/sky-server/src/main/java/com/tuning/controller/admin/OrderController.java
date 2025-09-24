@@ -2,6 +2,7 @@ package com.tuning.controller.admin;
 
 import com.Tuning.dto.OrdersConfirmDTO;
 import com.Tuning.dto.OrdersPageQueryDTO;
+import com.Tuning.dto.OrdersRejectionDTO;
 import com.Tuning.result.ApiResult;
 import com.Tuning.result.PageResult;
 import com.Tuning.vo.OrderStatisticsVO;
@@ -40,6 +41,12 @@ public class OrderController {
   @PutMapping("/confirm")
   public ApiResult<String> confirm(@RequestBody OrdersConfirmDTO ordersConfirmDTO) {
     orderService.confirm(ordersConfirmDTO);
+    return ApiResult.ok();
+  }
+
+  @PutMapping("/rejection")
+  public ApiResult<String> rejection(@RequestBody OrdersRejectionDTO ordersRejectionDTO) throws Exception {
+    orderService.rejection(ordersRejectionDTO);
     return ApiResult.ok();
   }
 }

@@ -2,6 +2,7 @@ package com.tuning.service;
 
 import com.Tuning.dto.OrdersConfirmDTO;
 import com.Tuning.dto.OrdersPageQueryDTO;
+import com.Tuning.dto.OrdersRejectionDTO;
 import com.Tuning.dto.OrdersSubmitDTO;
 import com.Tuning.result.PageResult;
 import com.Tuning.vo.OrderStatisticsVO;
@@ -24,4 +25,6 @@ public interface OrderService {
   OrderStatisticsVO statistics();
 
   void confirm(OrdersConfirmDTO ordersConfirmDTO);
+
+  void rejection(OrdersRejectionDTO ordersRejectionDTO);
 }

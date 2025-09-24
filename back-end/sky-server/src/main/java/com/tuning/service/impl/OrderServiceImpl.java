@@ -3,6 +3,7 @@ package com.tuning.service.impl;
 import com.Tuning.context.BaseContext;
 import com.Tuning.dto.OrdersConfirmDTO;
 import com.Tuning.dto.OrdersPageQueryDTO;
+import com.Tuning.dto.OrdersRejectionDTO;
 import com.Tuning.dto.OrdersSubmitDTO;
 import com.Tuning.entity.AddressBook;
 import com.Tuning.entity.OrderDetail;
@@ -30,6 +31,7 @@ import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 @Service
@@ -106,14 +108,13 @@ public class OrderServiceImpl implements OrderService {
     shoppingCartMapper.deleteByUserId(userId);
 
     // 9. 封装返回结果
-    OrderSubmitVO orderSubmitVO = OrderSubmitVO.builder()
+
+    return OrderSubmitVO.builder()
             .id(order.getId())
             .orderNumber(order.getNumber())
             .orderAmount(order.getAmount())
             .orderTime(order.getOrderTime())
             .build();
-
-    return orderSubmitVO;
   }
 
   @Override
@@ -257,6 +258,38 @@ public class OrderServiceImpl implements OrderService {
             .id(ordersConfirmDTO.getId())
             .status(Orders.CONFIRMED)
             .build();
+    orderMapper.update(orders);
+  }
+
+  @Override
+  public void rejection(OrdersRejectionDTO ordersRejectionDTO) {
+    // 根据id查询订单
+    Orders ordersDB = orderMapper.getById(ordersRejectionDTO.getId());
+
+    // 订单只有存在且状态为2（待接单）才可以拒单
+    if (ordersDB == null || ! ordersDB.getStatus().equals(Orders.TO_BE_CONFIRMED)) {
+      throw new BizException(HttpStatus.BAD_REQUEST, "当前状态无法拒单");
+    }
+
+    // 支付状态
+    Integer payStatus = ordersDB.getPayStatus();
+    if (Objects.equals(payStatus, Orders.PAID)) {
+      // 用户已支付，需要退款
+      // String refund = weChatPayUtil.refund(
+      //         ordersDB.getNumber(),
+      //         ordersDB.getNumber(),
+      //         new BigDecimal(0.01),
+      //         new BigDecimal(0.01));
+      // log.info("申请退款：{}", refund);
+    }
+
+    // 拒单需要退款，根据订单id更新订单状态、拒单原因、取消时间
+    Orders orders = new Orders();
+    orders.setId(ordersDB.getId());
+    orders.setStatus(Orders.CANCELLED);
+    orders.setRejectionReason(ordersRejectionDTO.getRejectionReason());
+    orders.setCancelTime(LocalDateTime.now());
+
     orderMapper.update(orders);
   }
 
