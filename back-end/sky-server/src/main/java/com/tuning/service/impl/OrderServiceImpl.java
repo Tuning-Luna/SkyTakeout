@@ -1,6 +1,7 @@
 package com.tuning.service.impl;
 
 import com.Tuning.context.BaseContext;
+import com.Tuning.dto.OrdersConfirmDTO;
 import com.Tuning.dto.OrdersPageQueryDTO;
 import com.Tuning.dto.OrdersSubmitDTO;
 import com.Tuning.entity.AddressBook;
@@ -248,6 +249,15 @@ public class OrderServiceImpl implements OrderService {
     orderStatisticsVO.setConfirmed(confirmed);
     orderStatisticsVO.setDeliveryInProgress(deliveryInProgress);
     return orderStatisticsVO;
+  }
+
+  @Override
+  public void confirm(OrdersConfirmDTO ordersConfirmDTO) {
+    Orders orders = Orders.builder()
+            .id(ordersConfirmDTO.getId())
+            .status(Orders.CONFIRMED)
+            .build();
+    orderMapper.update(orders);
   }
 
   private List<OrderVO> getOrderVOList(Page<Orders> page) {

@@ -1,5 +1,6 @@
 package com.tuning.service;
 
+import com.Tuning.dto.OrdersConfirmDTO;
 import com.Tuning.dto.OrdersPageQueryDTO;
 import com.Tuning.dto.OrdersSubmitDTO;
 import com.Tuning.result.PageResult;
@@ -21,4 +22,6 @@ public interface OrderService {
   PageResult<OrderVO> conditionSearch(OrdersPageQueryDTO ordersPageQueryDTO);
 
   OrderStatisticsVO statistics();
+
+  void confirm(OrdersConfirmDTO ordersConfirmDTO);
 }
