@@ -62,4 +62,10 @@ public class OrderController {
     orderService.delivery(id);
     return ApiResult.ok();
   }
+
+  @PutMapping("/complete/{id}")
+  public ApiResult complete(@PathVariable("id") Long id) {
+    orderService.complete(id);
+    return ApiResult.ok();
+  }
 }
