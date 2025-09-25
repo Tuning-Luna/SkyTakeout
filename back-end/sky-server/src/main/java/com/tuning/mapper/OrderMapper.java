@@ -23,4 +23,6 @@ public interface OrderMapper {
 
   List<Orders> getByStatusAndOrderTimeLT(@Param("status") Integer status,
                                          @Param("orderTime") LocalDateTime orderTime);
+
+  Orders getByNumberAndUserId(String outTradeNo, Long userId);
 }
