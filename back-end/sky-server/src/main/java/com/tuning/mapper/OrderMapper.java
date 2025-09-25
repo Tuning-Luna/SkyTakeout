@@ -28,4 +28,6 @@ public interface OrderMapper {
   Orders getByNumberAndUserId(String outTradeNo, Long userId);
 
   Double sumByMap(Map<String, Object> map);
+
+  Integer countByMap(Map<String, Object> map);
 }

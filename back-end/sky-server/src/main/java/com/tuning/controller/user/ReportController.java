@@ -1,6 +1,7 @@
 package com.tuning.controller.user;
 
 import com.Tuning.result.ApiResult;
+import com.Tuning.vo.OrderReportVO;
 import com.Tuning.vo.TurnoverReportVO;
 import com.Tuning.vo.UserReportVO;
 import com.tuning.service.ReportService;
@@ -35,5 +36,15 @@ public class ReportController {
           @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate end) {
 
     return ApiResult.ok(reportService.getUserStatistics(begin, end));
+  }
+
+  @GetMapping("/ordersStatistics")
+  public ApiResult<OrderReportVO> orderStatistics(
+          @DateTimeFormat(pattern = "yyyy-MM-dd")
+          LocalDate begin,
+          @DateTimeFormat(pattern = "yyyy-MM-dd")
+          LocalDate end) {
+
+    return ApiResult.ok(reportService.getOrderStatistics(begin, end));
   }
 }
