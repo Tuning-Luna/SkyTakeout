@@ -8,6 +8,7 @@ import org.apache.ibatis.annotations.Param;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Map;
 
 @Mapper
 public interface OrderMapper {
@@ -25,4 +26,6 @@ public interface OrderMapper {
                                          @Param("orderTime") LocalDateTime orderTime);
 
   Orders getByNumberAndUserId(String outTradeNo, Long userId);
+
+  Double sumByMap(Map<String, Object> map);
 }
