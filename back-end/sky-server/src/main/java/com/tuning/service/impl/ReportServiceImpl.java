@@ -2,7 +2,9 @@ package com.tuning.service.impl;
 
 import com.Tuning.entity.Orders;
 import com.Tuning.vo.TurnoverReportVO;
+import com.Tuning.vo.UserReportVO;
 import com.tuning.mapper.OrderMapper;
+import com.tuning.mapper.UserMapper;
 import com.tuning.service.ReportService;
 import org.springframework.stereotype.Service;
 
@@ -19,9 +21,12 @@ import java.util.stream.Collectors;
 public class ReportServiceImpl implements ReportService {
 
   final private OrderMapper orderMapper;
+  final private UserMapper userMapper;
 
-  public ReportServiceImpl(OrderMapper orderMapper) {
+
+  public ReportServiceImpl(OrderMapper orderMapper, UserMapper userMapper) {
     this.orderMapper = orderMapper;
+    this.userMapper = userMapper;
   }
 
   @Override
@@ -59,5 +64,44 @@ public class ReportServiceImpl implements ReportService {
                     .collect(Collectors.joining(",")))
             .build();
 
+  }
+
+  @Override
+  public UserReportVO getUserStatistics(LocalDate begin, LocalDate end) {
+    List<LocalDate> dateList = new ArrayList<>();
+    dateList.add(begin);
+
+    while (! begin.equals(end)) {
+      begin = begin.plusDays(1);
+      dateList.add(begin);
+    }
+    List<Integer> newUserList = new ArrayList<>(); // 新增用户数
+    List<Integer> totalUserList = new ArrayList<>(); // 总用户数
+
+    for (LocalDate date : dateList) {
+      LocalDateTime beginTime = LocalDateTime.of(date, LocalTime.MIN);
+      LocalDateTime endTime = LocalDateTime.of(date, LocalTime.MAX);
+      // 新增用户数量 select count(id) from user where create_time > ? and create_time < ?
+      Integer newUser = getUserCount(beginTime, endTime);
+      // 总用户数量 select count(id) from user where  create_time < ?
+      Integer totalUser = getUserCount(null, endTime);
+
+      newUserList.add(newUser);
+      totalUserList.add(totalUser);
+    }
+
+    return UserReportVO.builder()
+            .dateList(dateList.stream().map(String::valueOf).collect(Collectors.joining(",")))
+            .newUserList(newUserList.stream().map(String::valueOf).collect(Collectors.joining(",")))
+            .totalUserList(totalUserList.stream().map(String::valueOf).collect(Collectors.joining(",")))
+            .build();
+
+  }
+
+  private Integer getUserCount(LocalDateTime beginTime, LocalDateTime endTime) {
+    Map<String, Object> map = new HashMap<>();
+    map.put("begin", beginTime);
+    map.put("end", endTime);
+    return userMapper.countByMap(map);
   }
 }

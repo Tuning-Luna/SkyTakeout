@@ -1,9 +1,12 @@
 package com.tuning.service;
 
 import com.Tuning.vo.TurnoverReportVO;
+import com.Tuning.vo.UserReportVO;
 
 import java.time.LocalDate;
 
 public interface ReportService {
   TurnoverReportVO getTurnover(LocalDate begin, LocalDate end);
+
+  UserReportVO getUserStatistics(LocalDate begin, LocalDate end);
 }

@@ -2,6 +2,7 @@ package com.tuning.controller.user;
 
 import com.Tuning.result.ApiResult;
 import com.Tuning.vo.TurnoverReportVO;
+import com.Tuning.vo.UserReportVO;
 import com.tuning.service.ReportService;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -26,5 +27,13 @@ public class ReportController {
           @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate end) {
 
     return ApiResult.ok(reportService.getTurnover(begin, end));
+  }
+
+  @GetMapping("/userStatistics")
+  public ApiResult<UserReportVO> userStatistics(
+          @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate begin,
+          @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate end) {
+
+    return ApiResult.ok(reportService.getUserStatistics(begin, end));
   }
 }
