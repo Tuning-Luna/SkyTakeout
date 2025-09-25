@@ -10,6 +10,7 @@ import com.tuning.annotation.AutoFill;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
+import java.util.Map;
 
 @Mapper
 public interface DishMapper {
@@ -34,4 +35,6 @@ public interface DishMapper {
   List<Dish> getBySetmealId(Long setmealId);
 
   List<Dish> list(Dish dish);
+
+  Integer countByMap(Map<String, Object> map);
 }
