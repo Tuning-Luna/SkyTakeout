@@ -1,7 +1,9 @@
 package com.tuning.service.impl;
 
+import com.Tuning.dto.GoodsSalesDTO;
 import com.Tuning.entity.Orders;
 import com.Tuning.vo.OrderReportVO;
+import com.Tuning.vo.SalesTop10ReportVO;
 import com.Tuning.vo.TurnoverReportVO;
 import com.Tuning.vo.UserReportVO;
 import com.tuning.mapper.OrderMapper;
@@ -147,6 +149,29 @@ public class ReportServiceImpl implements ReportService {
             .totalOrderCount(totalOrderCount)
             .validOrderCount(validOrderCount)
             .orderCompletionRate(orderCompletionRate)
+            .build();
+
+  }
+
+  @Override
+  public SalesTop10ReportVO getSalesTop10(LocalDate begin, LocalDate end) {
+    LocalDateTime beginTime = LocalDateTime.of(begin, LocalTime.MIN);
+    LocalDateTime endTime = LocalDateTime.of(end, LocalTime.MAX);
+    List<GoodsSalesDTO> goodsSalesDTOList = orderMapper.getSalesTop10(beginTime, endTime);
+
+    String nameList = goodsSalesDTOList.stream()
+            .map(GoodsSalesDTO::getName)
+            .map(String::valueOf) // 保险起见，避免 null 报错
+            .collect(Collectors.joining(","));
+
+    String numberList = goodsSalesDTOList.stream()
+            .map(GoodsSalesDTO::getNumber)
+            .map(String::valueOf)
+            .collect(Collectors.joining(","));
+
+    return SalesTop10ReportVO.builder()
+            .nameList(nameList)
+            .numberList(numberList)
             .build();
 
   }

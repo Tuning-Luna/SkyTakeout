@@ -1,5 +1,6 @@
 package com.tuning.mapper;
 
+import com.Tuning.dto.GoodsSalesDTO;
 import com.Tuning.dto.OrdersPageQueryDTO;
 import com.Tuning.entity.Orders;
 import com.github.pagehelper.Page;
@@ -30,4 +31,6 @@ public interface OrderMapper {
   Double sumByMap(Map<String, Object> map);
 
   Integer countByMap(Map<String, Object> map);
+
+  List<GoodsSalesDTO> getSalesTop10(LocalDateTime begin, LocalDateTime end);
 }

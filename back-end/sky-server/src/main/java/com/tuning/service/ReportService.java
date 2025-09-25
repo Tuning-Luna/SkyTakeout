@@ -1,6 +1,7 @@
 package com.tuning.service;
 
 import com.Tuning.vo.OrderReportVO;
+import com.Tuning.vo.SalesTop10ReportVO;
 import com.Tuning.vo.TurnoverReportVO;
 import com.Tuning.vo.UserReportVO;
 
@@ -12,4 +13,6 @@ public interface ReportService {
   UserReportVO getUserStatistics(LocalDate begin, LocalDate end);
 
   OrderReportVO getOrderStatistics(LocalDate begin, LocalDate end);
+
+  SalesTop10ReportVO getSalesTop10(LocalDate begin, LocalDate end);
 }
