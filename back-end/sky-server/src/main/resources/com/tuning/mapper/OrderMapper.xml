@@ -51,6 +51,13 @@
         FROM orders
         WHERE status = #{status}
     </select>
+    <select id="getByStatusAndOrderTimeLT" resultType="com.Tuning.entity.Orders">
+        SELECT *
+        FROM orders
+        WHERE status = #{status}
+          AND order_time &lt; #{orderTime}
+    </select>
+
 
     <update id="update">
         UPDATE orders
