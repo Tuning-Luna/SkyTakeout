@@ -6,6 +6,7 @@ import com.Tuning.vo.SalesTop10ReportVO;
 import com.Tuning.vo.TurnoverReportVO;
 import com.Tuning.vo.UserReportVO;
 import com.tuning.service.ReportService;
+import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -54,5 +55,10 @@ public class ReportController {
           @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate begin,
           @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate end) {
     return ApiResult.ok(reportService.getSalesTop10(begin, end));
+  }
+
+  @GetMapping("/export")
+  public void export(HttpServletResponse response) {
+    reportService.exportBusinessData(response);
   }
 }

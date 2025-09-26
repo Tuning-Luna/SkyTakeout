@@ -38,53 +38,54 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "JUnit.HttpClientTest.getTest.executor": "Run",
-    "JUnit.HttpClientTest.postTest.executor": "Run",
-    "JUnit.POITest.test.executor": "Run",
-    "JUnit.SkyServerApplicationTests.test.executor": "Run",
-    "JUnit.SkyServerApplicationTests.testHash.executor": "Run",
-    "JUnit.SkyServerApplicationTests.testString.executor": "Run",
-    "ModuleVcsDetector.initialDetectionPerformed": "true",
-    "RequestMappingsPanelOrder0": "0",
-    "RequestMappingsPanelOrder1": "1",
-    "RequestMappingsPanelWidth0": "75",
-    "RequestMappingsPanelWidth1": "75",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHELLCHECK.PATH": "我会在意",
-    "Spring Boot.SkyServerApplication.executor": "Run",
-    "git-widget-placeholder": "main",
-    "ignore.virus.scanning.warn.message": "true",
-    "last_directory_selection": "E:/FrontEndProject/SkyTakeout/back-end/sky-server/src/main/java/com/tuning",
-    "last_opened_file_path": "E:/FrontEndProject/SkyTakeout/back-end/sky-server/src/main/resources/com/tuning/mapper",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "onboarding.tips.debug.path": "E:/FrontEndProject/SkyTakeout/back-end/sky-pojo/src/main/java/com/Tuning/Main.java",
-    "project.structure.last.edited": "模块",
-    "project.structure.proportion": "0.0",
-    "project.structure.side.proportion": "0.0",
-    "settings.editor.selected.configurable": "MavenSettings",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;JUnit.HttpClientTest.getTest.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.HttpClientTest.postTest.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.POITest.test.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.SkyServerApplicationTests.test.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.SkyServerApplicationTests.testHash.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.SkyServerApplicationTests.testString.executor&quot;: &quot;Run&quot;,
+    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
+    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
+    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
+    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
+    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHELLCHECK.PATH&quot;: &quot;我会在意&quot;,
+    &quot;Spring Boot.SkyServerApplication.executor&quot;: &quot;Run&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;last_directory_selection&quot;: &quot;E:/FrontEndProject/SkyTakeout/back-end/sky-server/src/main/java/com/tuning&quot;,
+    &quot;last_opened_file_path&quot;: &quot;E:/FrontEndProject/SkyTakeout/back-end/sky-server/src/main/resources/templates&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;onboarding.tips.debug.path&quot;: &quot;E:/FrontEndProject/SkyTakeout/back-end/sky-pojo/src/main/java/com/Tuning/Main.java&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;模块&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;MavenSettings&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   },
-  "keyToStringList": {
-    "DatabaseDriversLRU": [
-      "redis",
-      "mysql"
+  &quot;keyToStringList&quot;: {
+    &quot;DatabaseDriversLRU&quot;: [
+      &quot;redis&quot;,
+      &quot;mysql&quot;
     ],
-    "com.intellij.ide.scratch.LRUPopupBuilder$1/SQL 方言": [
-      "MySQL"
+    &quot;com.intellij.ide.scratch.LRUPopupBuilder$1/SQL 方言&quot;: [
+      &quot;MySQL&quot;
     ]
   }
-}]]></component>
+}</component>
   <component name="ReactorSettings">
     <option name="notificationShown" value="true" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="E:\FrontEndProject\SkyTakeout\back-end\sky-server\src\main\resources\templates" />
       <recent name="E:\FrontEndProject\SkyTakeout\back-end\sky-server\src\main\resources\com\tuning\mapper" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
@@ -99,7 +100,7 @@
       <recent name="com.Tuning.dto" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.POITest.test">
+  <component name="RunManager" selected="Spring Boot.SkyServerApplication">
     <configuration name="HttpClientTest.getTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="sky-server" />
       <extension name="coverage">
@@ -254,7 +255,8 @@
       <workItem from="1758808399404" duration="2280000" />
       <workItem from="1758812424772" duration="1303000" />
       <workItem from="1758851710235" duration="1651000" />
-      <workItem from="1758853791321" duration="996000" />
+      <workItem from="1758853791321" duration="2766000" />
+      <workItem from="1758856801769" duration="69000" />
     </task>
     <servers />
   </component>

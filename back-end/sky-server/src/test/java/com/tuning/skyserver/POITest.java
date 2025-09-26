@@ -5,7 +5,6 @@ import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.junit.jupiter.api.Test;
 
-import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
@@ -32,7 +31,7 @@ public class POITest {
     row3.createCell(1).setCellValue("李四");
     row3.createCell(2).setCellValue("上海");
 
-    FileOutputStream out = new FileOutputStream(new File("D:\\itcast.xlsx"));
+    FileOutputStream out = new FileOutputStream("D:\\itcast.xlsx");
     // 通过输出流将内存中的Excel文件写入到磁盘上
     excel.write(out);
 
